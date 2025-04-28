@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './components/Auth/Login';
 import VehicleList from './components/VehicleList';
-import PromocionList from './components/PromocionList'; // 1. Importa el componente
+import PromocionList from './components/PromocionList';
+import EditPromocion from './components/EditPromocion'; // 1. Importa el nuevo componente
 import Logout from './components/Auth/Logout';
 import Navbar from './components/Navbar';
 import CreateEmployee from './components/Auth/CreateEmployee';
@@ -34,10 +35,16 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
 
-          {/* 2. Nueva ruta para promociones (accesible para todos los usuarios autenticados) */}
           <Route path="/promociones" element={
             <PrivateRoute>
               <PromocionList />
+            </PrivateRoute>
+          } />
+
+          {/* 2. Nueva ruta para editar promociones (solo admin) */}
+          <Route path="/promociones/editar/:id" element={
+            <PrivateRoute adminOnly>
+              <EditPromocion />
             </PrivateRoute>
           } />
 
