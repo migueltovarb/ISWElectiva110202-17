@@ -1,0 +1,17 @@
+argon2-cffi
+argon2-cffi-bindings
+asgiref
+bootstrap4
+cffi
+crispy-bootstrap4
+Django
+django-cors-headers
+django-crispy-forms
+django-rest-framework
+djangorestframework
+djangorestframework_simplejwt
+pillow
+pycparser
+PyJWT
+sqlparse
+tzdata
