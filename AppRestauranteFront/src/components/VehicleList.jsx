@@ -24,7 +24,6 @@ const VehicleList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // Variables de permisos
   const canEdit = user?.is_admin || user?.tipo_empleado === 'MES';
   const canAdd = user?.is_admin;
   const canDelete = user?.is_admin;
@@ -110,7 +109,6 @@ const VehicleList = () => {
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
         <div>
           <h1 className="text-2xl font-bold text-gray-800">
@@ -130,7 +128,6 @@ const VehicleList = () => {
         )}
       </div>
 
-      {/* Filtros y búsqueda */}
       <div className="bg-white p-4 rounded-lg shadow mb-6 border border-gray-200">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="relative flex-1">
@@ -180,7 +177,6 @@ const VehicleList = () => {
         </div>
       </div>
 
-      {/* Tabla de productos */}
       <div className="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -254,7 +250,6 @@ const VehicleList = () => {
         </div>
       </div>
 
-      {/* Modales */}
       {showAddProduct && (
         <AddVehicle 
           onClose={() => setShowAddProduct(false)}

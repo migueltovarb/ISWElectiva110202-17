@@ -15,7 +15,6 @@ const PromocionList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
-  // Datos mock mejorados
   const mockPromociones = [
     {
       id: 1,
@@ -71,7 +70,7 @@ const PromocionList = () => {
 
   const filteredPromociones = promociones.filter(promocion => {
     const matchesSearch = promocion.nombre.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                         promocion.descripcion.toLowerCase().includes(searchTerm.toLowerCase());
+                          promocion.descripcion.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = user?.is_admin || promocion.estado === 'ACTIVA';
     
     return matchesSearch && matchesStatus;
@@ -117,7 +116,6 @@ const PromocionList = () => {
 
   return (
     <div className="promociones-container">
-      {/* Header con efecto vidrio y gradiente */}
       <div className="promociones-header glass-effect">
         <div className="header-content">
           <h1 className="promociones-title">
@@ -138,7 +136,6 @@ const PromocionList = () => {
         )}
       </div>
 
-      {/* Barra de búsqueda */}
       <div className="controls-container">
         <div className="search-bar">
           <input
@@ -151,7 +148,6 @@ const PromocionList = () => {
         </div>
       </div>
 
-      {/* Contenido principal */}
       <div className="promociones-content">
         {filteredPromociones.length === 0 ? (
           <div className="empty-state">
@@ -186,7 +182,6 @@ const PromocionList = () => {
         )}
       </div>
 
-      {/* Modal de creación */}
       {showCreateForm && (
         <CreatePromocion
           onClose={() => setShowCreateForm(false)}

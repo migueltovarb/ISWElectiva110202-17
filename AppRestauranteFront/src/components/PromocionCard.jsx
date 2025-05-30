@@ -1,29 +1,55 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../api/axiosConfig'; // Asegúrate que este import esté bien.
+import axios from '../api/axiosConfig';
 
 const PromocionCard = ({ promocion, isAdmin, onEdit, onDelete }) => {
   const navigate = useNavigate();
   const [productosDetalles, setProductosDetalles] = useState([]);
+  const [precioTotal, setPrecioTotal] = useState(0);
+  const [precioConDescuento, setPrecioConDescuento] = useState(0);
   const fechaFin = new Date(promocion.fecha_fin);
   const fechaInicio = new Date(promocion.fecha_inicio);
   const hoy = new Date();
   const diasRestantes = Math.ceil((fechaFin - hoy) / (1000 * 60 * 60 * 24));
 
+  const colors = {
+    primary: '#D35400',     
+    secondary: '#E67E22',   
+    accent: '#E74C3C',      
+    light: '#FDEBD0',   
+    dark: '#7E5109',      
+    background: '#F5CBA7', 
+    text: '#4E342E',      
+    success: '#27AE60',     
+    warning: '#F39C12',     
+    danger: '#C0392B'      
+  };
+
   useEffect(() => {
     const fetchProductos = async () => {
       try {
         if (promocion.productos && promocion.productos.length > 0) {
-          // Si productos son solo IDs (números), los buscamos
-          if (typeof promocion.productos[0] === 'number') {
+          let productosData = [];
+          
+          if (typeof promocion.productos[0] === 'number' || typeof promocion.productos[0] === 'string') {
             const response = await axios.get('/productos/');
-            const todosProductos = response.data;
-            const productosFiltrados = todosProductos.filter(p => promocion.productos.includes(p.id));
-            setProductosDetalles(productosFiltrados);
+            productosData = response.data.filter(p => promocion.productos.includes(p.id));
           } else {
-            // Si ya viene con nombre y categoría, los usamos directo
-            setProductosDetalles(promocion.productos);
+            productosData = promocion.productos;
           }
+
+          setProductosDetalles(productosData);
+          
+          const total = productosData.reduce((sum, producto) => {
+            const precio = parseFloat(producto.precio) || 0;
+            return sum + precio;
+          }, 0);
+          
+          setPrecioTotal(total);
+          
+          const descuento = parseFloat(promocion.descuento) || 0;
+          const descuentoDecimal = Math.min(Math.max(descuento, 0), 100) / 100;
+          setPrecioConDescuento(total * (1 - descuentoDecimal));
         }
       } catch (error) {
         console.error('Error cargando productos de la promoción:', error);
@@ -31,9 +57,25 @@ const PromocionCard = ({ promocion, isAdmin, onEdit, onDelete }) => {
     };
 
     fetchProductos();
-  }, [promocion.productos]);
+  }, [promocion.productos, promocion.descuento]);
 
-  // Función para obtener el icono de categoría
+  const formatPrice = (price) => {
+    const numericPrice = parseFloat(price) || 0;
+    return new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(numericPrice);
+  };
+
+  const formatDiscount = (discount) => {
+    const numericDiscount = parseFloat(discount) || 0;
+    return Number.isInteger(numericDiscount) ? 
+      numericDiscount.toString() : 
+      numericDiscount.toFixed(2).replace(/\.?0+$/, '');
+  };
+
   const getCategoryIcon = () => {
     switch(promocion.categoria) {
       case 'BEBIDA': return '🍹';
@@ -44,81 +86,244 @@ const PromocionCard = ({ promocion, isAdmin, onEdit, onDelete }) => {
     }
   };
 
-  // Determinar el estado de la promoción
   const getEstadoPromocion = () => {
-    if (promocion.estado === 'INACTIVA') return { texto: '⏳ INACTIVA', clase: 'inactive' };
-    if (hoy > fechaFin) return { texto: '✋ EXPIRADA', clase: 'expired' };
-    if (diasRestantes <= 3) return { texto: `🔥 ${diasRestantes} días`, clase: 'urgent' };
-    return { texto: '✅ ACTIVA', clase: 'active' };
+    if (promocion.estado === 'INACTIVA') return { texto: 'INACTIVA', color: colors.warning };
+    if (hoy > fechaFin) return { texto: 'EXPIRADA', color: colors.danger };
+    if (diasRestantes <= 3) return { texto: `${diasRestantes} DÍAS`, color: colors.accent };
+    return { texto: 'ACTIVA', color: colors.success };
   };
 
   const estado = getEstadoPromocion();
 
   return (
-    <div className={`promo-card ${promocion.estado === 'ACTIVA' ? 'active' : 'inactive'}`}>
-      <div className="promo-header">
-        <div className="promo-category">
-          {getCategoryIcon()} {promocion.categoria || 'Promoción'}
+    <div style={{
+      border: `1px solid ${colors.primary}`,
+      borderRadius: '12px',
+      padding: '16px',
+      margin: '10px',
+      backgroundColor: colors.light,
+      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+      fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
+      color: colors.text
+    }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        marginBottom: '12px'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{ fontSize: '28px' }}>{getCategoryIcon()}</span>
+          <h3 style={{ 
+            margin: 0, 
+            color: colors.dark,
+            fontSize: '1.3rem'
+          }}>
+            {promocion.nombre}
+          </h3>
         </div>
-        <div className={`promo-badge ${estado.clase}`}>
+        <span style={{
+          backgroundColor: estado.color,
+          color: 'white',
+          padding: '4px 12px',
+          borderRadius: '20px',
+          fontSize: '12px',
+          fontWeight: 'bold',
+          textTransform: 'uppercase'
+        }}>
           {estado.texto}
+        </span>
+      </div>
+
+      <p style={{ 
+        color: colors.text,
+        margin: '8px 0 16px',
+        fontSize: '0.95rem',
+        lineHeight: '1.4'
+      }}>
+        {promocion.descripcion}
+      </p>
+
+      <div style={{
+        background: `linear-gradient(135deg, ${colors.light} 0%, ${colors.background} 100%)`,
+        border: `2px solid ${colors.secondary}`,
+        borderRadius: '10px',
+        padding: '16px',
+        margin: '16px 0',
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      }}>
+        <div style={{
+          position: 'absolute',
+          top: '0',
+          right: '0',
+          background: colors.accent,
+          color: 'white',
+          padding: '4px 12px',
+          fontSize: '14px',
+          fontWeight: 'bold',
+          borderBottomLeftRadius: '10px',
+          boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+        }}>
+          {formatDiscount(promocion.descuento)}% OFF
+        </div>
+
+        <div style={{ 
+          marginBottom: '6px', 
+          color: colors.dark,
+          textDecoration: 'line-through',
+          opacity: 0.8,
+          fontSize: '0.9rem'
+        }}>
+          {formatPrice(precioTotal)}
+        </div>
+        
+        <div style={{ 
+          fontSize: '28px', 
+          fontWeight: 'bold', 
+          color: colors.primary,
+          margin: '8px 0',
+          textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
+        }}>
+          {formatPrice(precioConDescuento)}
+        </div>
+        
+        <div style={{ 
+          fontSize: '12px', 
+          color: colors.dark,
+          marginTop: '4px',
+          letterSpacing: '0.5px'
+        }}>
+          PRECIO FINAL CON DESCUENTO
         </div>
       </div>
 
-      <div className="promo-content">
-        <h3 className="promo-title">{promocion.nombre}</h3>
-        <p className="promo-desc">{promocion.descripcion}</p>
-
-        <div className="promo-discount">
-          <span className="discount-value">{promocion.descuento}%</span>
-          <span className="discount-label">DESCUENTO</span>
+      <div style={{
+        margin: '16px 0',
+        border: `1px solid ${colors.secondary}`,
+        borderRadius: '8px',
+        overflow: 'hidden'
+      }}>
+        <div style={{
+          backgroundColor: colors.secondary,
+          color: 'white',
+          padding: '8px 12px',
+          fontWeight: 'bold',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px'
+        }}>
+          <span>📦</span>
+          <span>PRODUCTOS INCLUIDOS</span>
         </div>
+        
+        {productosDetalles.length > 0 ? (
+          <ul style={{
+            listStyle: 'none',
+            padding: '0',
+            margin: '0',
+            backgroundColor: 'rgba(255, 255, 255, 0.7)'
+          }}>
+            {productosDetalles.map((producto, index) => (
+              <li key={producto.id || index} style={{
+                padding: '10px 12px',
+                borderBottom: `1px solid ${colors.background}`,
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}>
+                <span style={{ fontWeight: '500' }}>{producto.nombre}</span>
+                <span style={{ 
+                  color: colors.accent,
+                  fontWeight: 'bold'
+                }}>
+                  {formatPrice(producto.precio)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div style={{
+            padding: '12px',
+            textAlign: 'center',
+            color: colors.text,
+            backgroundColor: 'rgba(255, 255, 255, 0.7)',
+            fontStyle: 'italic'
+          }}>
+            No hay productos especificados
+          </div>
+        )}
+      </div>
 
-        {/* Sección de productos */}
-        <div className="promo-products">
-          <h4>📦 Productos incluidos:</h4>
-          
-          {productosDetalles.length > 0 ? (
-            <ul className="productos-list">
-              {productosDetalles.map((producto, index) => (
-                <li key={producto.id || index} className="producto-item">
-                  <span className="product-name">{producto.nombre}</span>
-                  {producto.categoria && (
-                    <span className="product-category">{producto.categoria}</span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="no-products">No se especificaron productos para esta promoción</p>
-          )}
+      {/* Fechas */}
+      <div style={{ 
+        marginTop: '12px', 
+        fontSize: '14px',
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        padding: '12px',
+        borderRadius: '8px'
+      }}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          marginBottom: '6px',
+          borderBottom: `1px dashed ${colors.secondary}`,
+          paddingBottom: '6px'
+        }}>
+          <span style={{ color: colors.dark, fontWeight: '500' }}>Inicio:</span>
+          <span>{fechaInicio.toLocaleDateString()}</span>
         </div>
-
-        <div className="promo-dates">
-          <div className="date-range">
-            <span>🗓️ Inicio: {fechaInicio.toLocaleDateString()}</span>
-            <span> → </span>
-            <span>🗓️ Fin: {fechaFin.toLocaleDateString()}</span>
-          </div>
-          <div className={`days-left ${estado.clase}`}>
-            {hoy > fechaFin ? 'Expirada' : `${diasRestantes} días restantes`}
-          </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <span style={{ color: colors.dark, fontWeight: '500' }}>Fin:</span>
+          <span>{fechaFin.toLocaleDateString()}</span>
         </div>
       </div>
 
       {isAdmin && (
-        <div className="promo-actions">
+        <div style={{ 
+          display: 'flex', 
+          gap: '10px', 
+          marginTop: '20px'
+        }}>
           <button 
             onClick={onEdit ? onEdit : () => navigate(`/promociones/editar/${promocion.id}`)}
-            className="action-btn edit-btn"
+            style={{
+              flex: 1,
+              padding: '10px',
+              backgroundColor: colors.secondary,
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontWeight: 'bold',
+              transition: 'all 0.2s',
+              ':hover': {
+                backgroundColor: colors.primary
+              }
+            }}
           >
-            ✏️ Editar
+            Editar
           </button>
           <button 
             onClick={onDelete}
-            className="action-btn delete-btn"
+            style={{
+              flex: 1,
+              padding: '10px',
+              backgroundColor: colors.danger,
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontWeight: 'bold',
+              transition: 'all 0.2s',
+              ':hover': {
+                backgroundColor: '#8B0000'
+              }
+            }}
           >
-            🗑️ Eliminar
+            Eliminar
           </button>
         </div>
       )}

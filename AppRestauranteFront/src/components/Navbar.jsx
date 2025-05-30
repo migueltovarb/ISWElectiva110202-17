@@ -15,7 +15,6 @@ const Navbar = () => {
 
   if (!user) return null;
 
-  // Función para determinar si una ruta está activa
   const isActive = (path) => location.pathname === path;
 
   return (
@@ -23,7 +22,6 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           
-          {/* Logo y nombre de la app (izquierda) */}
           <Link 
             to={user.is_admin ? '/admin' : '/mesero'} 
             className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
@@ -32,10 +30,8 @@ const Navbar = () => {
             <span className="font-bold text-white">AppRestaurante</span>
           </Link>
 
-          {/* Elementos centrados */}
           <div className="flex-1 flex justify-center">
             <div className="flex space-x-4">
-              {/* Enlace a Promociones */}
               <Link 
                 to="/promociones" 
                 className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
@@ -47,7 +43,6 @@ const Navbar = () => {
                 Promociones
               </Link>
 
-              {/* Enlace solo para admin */}
               {user.is_admin && (
                 <>
                   <Link 
@@ -75,16 +70,13 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Elementos de usuario (derecha) */}
           <div className="flex items-center space-x-4">
-            {/* Badge de tipo de usuario */}
             <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
               user.is_admin ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800'
             }`}>
               {user.tipo_empleado}
             </span>
 
-            {/* Menú de usuario */}
             <div className="relative">
               <button 
                 className="flex items-center space-x-2 focus:outline-none hover:opacity-80 transition-opacity"
@@ -123,7 +115,6 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Overlay para cerrar el dropdown */}
       {showDropdown && (
         <div 
           className="fixed inset-0 z-10" 
