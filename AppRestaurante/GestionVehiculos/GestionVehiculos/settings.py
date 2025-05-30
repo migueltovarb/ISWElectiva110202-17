@@ -4,7 +4,7 @@ from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-tu-clave-secreta-aqui'  # Cambiar en producción
+SECRET_KEY = 'django-insecure-tu-clave-secreta-aqui'  # ¡Cambia esto en producción!
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'AppVehiculos',
+    'imagekit',
 ]
 
 MIDDLEWARE = [
@@ -54,11 +55,16 @@ WSGI_APPLICATION = 'GestionVehiculos.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'gestion_vehiculos_db',
+        'USER': 'admin_vehiculos',
+        'PASSWORD': 'vehiculos123', 
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
+# Validadores de contraseña
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -72,9 +78,8 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-AUTH_USER_MODEL = 'AppVehiculos.Empleado'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -95,7 +100,7 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
-    'TOKEN_OBTAIN_SERIALIZER': 'AppVehiculos.serializers.CustomTokenObtainPairSerializer',
+    'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
 AUTH_USER_MODEL = 'AppVehiculos.Empleado'
