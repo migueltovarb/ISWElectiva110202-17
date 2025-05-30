@@ -3,11 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './components/Auth/Login';
 import VehicleList from './components/VehicleList';
 import PromocionList from './components/PromocionList';
-<<<<<<< HEAD
 import EditPromocion from './components/EditPromocion'; // 1. Importa el nuevo componente
-=======
-import EditPromocion from './components/EditPromocion';
->>>>>>> develop
 import Logout from './components/Auth/Logout';
 import Navbar from './components/Navbar';
 import CreateEmployee from './components/Auth/CreateEmployee';
@@ -85,8 +81,6 @@ function App() {
             </PublicLayout>
           } />
 
-<<<<<<< HEAD
-=======
           {/* Página principal para clientes autenticados */}
           <Route path="/customer-home" element={
             <PrivateRoute forCustomers>
@@ -116,17 +110,14 @@ function App() {
           } />
 
           {/* Rutas protegidas para personal */}
->>>>>>> develop
+
           <Route path="/promociones" element={
             <PrivateRoute>
               <PromocionList />
             </PrivateRoute>
           } />
 
-<<<<<<< HEAD
-          {/* 2. Nueva ruta para editar promociones (solo admin) */}
-=======
->>>>>>> develop
+
           <Route path="/promociones/editar/:id" element={
             <PrivateRoute adminOnly>
               <EditPromocion />
