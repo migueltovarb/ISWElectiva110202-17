@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Empleado, Producto
 from .models import Promocion
+from django.utils.html import format_html
 
 @admin.register(Empleado)
 class EmpleadoAdmin(admin.ModelAdmin):
@@ -9,11 +10,15 @@ class EmpleadoAdmin(admin.ModelAdmin):
 
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'categoria', 'precio', 'estado')
-    list_filter = ('categoria', 'estado')
-    search_fields = ('nombre', 'descripcion')
+    list_display = ('nombre', 'categoria', 'precio', 'estado', 'imagen_preview')
+    readonly_fields = ('imagen_preview',)
+    
+    def imagen_preview(self, obj):
+        if obj.imagen:
+            return format_html('<img src="{}" width="50" />', obj.imagen.url)
+        return "Sin imagen"
+    imagen_preview.short_description = 'Vista previa'
 
-# Añade esto al final de admin.py
 @admin.register(Promocion)
 class PromocionAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'descuento', 'fecha_inicio', 'fecha_fin', 'estado', 'esta_activa')

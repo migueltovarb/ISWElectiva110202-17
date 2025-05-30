@@ -12,5 +12,4 @@ class IsAdminOrMeseroOrReadOnly(BasePermission):
             request.user.is_admin() or request.user.tipo_empleado == 'MES'
         )
 
-# Para mantener compatibilidad con código existente
 IsAdminOrReadOnly = IsAdminOrMeseroOrReadOnly

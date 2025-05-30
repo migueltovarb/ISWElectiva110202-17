@@ -1,30 +1,76 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './components/Auth/Login';
 import VehicleList from './components/VehicleList';
 import PromocionList from './components/PromocionList';
+<<<<<<< HEAD
 import EditPromocion from './components/EditPromocion'; // 1. Importa el nuevo componente
+=======
+import EditPromocion from './components/EditPromocion';
+>>>>>>> develop
 import Logout from './components/Auth/Logout';
 import Navbar from './components/Navbar';
 import CreateEmployee from './components/Auth/CreateEmployee';
+import HomePage from './components/HomePage';
+import GuestNavbar from './components/GuestNavbar';
+import UserNavbar from './components/UserNavbar';
+import RegisterCustomer from './components/Auth/RegisterCustomer';
+import CustomerHomePage from './components/CustomerHomePage';
 
-const PrivateLayout = ({ children }) => (
+// Layout para rutas públicas
+const PublicLayout = ({ children }) => {
+  const { user, userType } = useAuth();
+  return (
+    <>
+      {user && userType === 'customer' ? <UserNavbar /> : <GuestNavbar />}
+      <main>{children}</main>
+    </>
+  );
+};
+
+// Layout para rutas del personal
+const StaffLayout = ({ children }) => (
   <>
     <Navbar />
-    <main className="pt-16">
-      {children}
-    </main>
+    <main className="pt-16">{children}</main>
   </>
 );
 
-const PrivateRoute = ({ children, adminOnly = false }) => {
-  const { user, loading } = useAuth();
+// Componente para redirección inteligente
+const AuthRedirector = () => {
+  const { user, userType } = useAuth();
 
-  if (loading) return <div>Cargando...</div>;
-  if (!user) return <Navigate to="/login" replace />;
+  if (user) {
+    if (userType === 'customer') {
+      return <Navigate to="/customer-home" replace />;
+    }
+    return user?.is_admin ? (
+      <Navigate to="/admin" replace />
+    ) : (
+      <Navigate to="/mesero" replace />
+    );
+  }
+
+  return <Navigate to="/" replace />;
+};
+
+// Componente para rutas privadas
+const PrivateRoute = ({ children, adminOnly = false, forCustomers = false }) => {
+  const { user, loading, userType } = useAuth();
+
+  if (loading) return <div className="flex justify-center items-center h-screen">Cargando...</div>;
+  
+  if (!user) return <Navigate to={forCustomers ? "/login-cliente" : "/login"} replace />;
+  
   if (adminOnly && !user.is_admin) return <Navigate to="/" replace />;
+  
+  if (forCustomers && userType !== 'customer') return <Navigate to="/" replace />;
 
-  return <PrivateLayout>{children}</PrivateLayout>;
+  return forCustomers ? (
+    <PublicLayout>{children}</PublicLayout>
+  ) : (
+    <StaffLayout>{children}</StaffLayout>
+  );
 };
 
 function App() {
@@ -32,16 +78,55 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
+          {/* Página principal para invitados */}
+          <Route path="/" element={
+            <PublicLayout>
+              <HomePage />
+            </PublicLayout>
+          } />
 
+<<<<<<< HEAD
+=======
+          {/* Página principal para clientes autenticados */}
+          <Route path="/customer-home" element={
+            <PrivateRoute forCustomers>
+              <CustomerHomePage />
+            </PrivateRoute>
+          } />
+
+          {/* Autenticación */}
+          <Route path="/login" element={
+            <PublicLayout>
+              <Login />
+            </PublicLayout>
+          } />
+          <Route path="/logout" element={
+            <PublicLayout>
+              <Logout />
+            </PublicLayout>
+          } />
+          <Route path="/auth-redirect" element={<AuthRedirector />} />
+
+          {/* Rutas para clientes */}
+          
+          <Route path="/registro-cliente" element={
+            <PublicLayout>
+              <RegisterCustomer />
+            </PublicLayout>
+          } />
+
+          {/* Rutas protegidas para personal */}
+>>>>>>> develop
           <Route path="/promociones" element={
             <PrivateRoute>
               <PromocionList />
             </PrivateRoute>
           } />
 
+<<<<<<< HEAD
           {/* 2. Nueva ruta para editar promociones (solo admin) */}
+=======
+>>>>>>> develop
           <Route path="/promociones/editar/:id" element={
             <PrivateRoute adminOnly>
               <EditPromocion />
@@ -66,15 +151,8 @@ function App() {
             </PrivateRoute>
           } />
 
-          <Route path="/" element={
-            <PrivateRoute>
-              {({ user }) => user?.is_admin ? (
-                <Navigate to="/admin" replace />
-              ) : (
-                <Navigate to="/mesero" replace />
-              )}
-            </PrivateRoute>
-          } />
+          {/* Redirección para rutas no encontradas */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
     </AuthProvider>

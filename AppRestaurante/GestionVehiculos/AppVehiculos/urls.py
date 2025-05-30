@@ -5,6 +5,8 @@ from .views import (
     ProductoAPIView,
     PromocionAPIView,
     PromocionDetailAPIView,
+    ClienteRegistroView,
+    ClienteLoginView,
 )
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -16,4 +18,6 @@ urlpatterns = [
     path('productos/<int:pk>/', ProductoAPIView.as_view(), name='producto-detail'),
     path('promociones/', PromocionAPIView.as_view(), name='promocion-list'),
     path('promociones/<int:pk>/', PromocionDetailAPIView.as_view(), name='promocion-detail'),
+    path('clientes/registro/', ClienteRegistroView.as_view(), name='cliente-registro'),
+    path('clientes/login/', ClienteLoginView.as_view(), name='cliente-login'),
 ]

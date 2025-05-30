@@ -36,8 +36,7 @@ const EditVehicle = ({ vehicle, onClose, onEdit }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Validación mejorada
+
         const formIsValid = validateForm();
         if (!formIsValid) return;
     
@@ -51,10 +50,9 @@ const EditVehicle = ({ vehicle, onClose, onEdit }) => {
                 throw new Error("La respuesta no contiene datos");
             }
     
-            // Actualización optimizada
             onEdit({
-                ...vehicle,  // Mantiene todos los campos originales
-                ...response.data  // Sobrescribe con los campos actualizados
+                ...vehicle,  
+                ...response.data  
             });
             
             onClose();
@@ -70,7 +68,6 @@ const EditVehicle = ({ vehicle, onClose, onEdit }) => {
     
             setErrors(prev => ({...prev, server: errorMessage}));
     
-            // Cierre automático solo si la API respondió con éxito
             if (error.response?.status === 200) {
                 setTimeout(onClose, 1500);
             }

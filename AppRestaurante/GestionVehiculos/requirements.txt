@@ -15,3 +15,5 @@ pycparser
 PyJWT
 sqlparse
 tzdata
+psycopg2-binary
+django-imagekit

@@ -16,7 +16,6 @@ class EmpleadoTests(APITestCase):
             email='admin@test.com'
         )
         
-        # Crear un mesero para pruebas
         self.mesero = Empleado.objects.create_user(
             username='mesero',
             password='mesero123',
@@ -24,15 +23,12 @@ class EmpleadoTests(APITestCase):
             email='mesero@test.com'
         )
         
-        # Cliente autenticado como admin
         self.admin_client = APIClient()
         self.admin_client.force_authenticate(user=self.admin)
         
-        # Cliente autenticado como mesero
         self.mesero_client = APIClient()
         self.mesero_client.force_authenticate(user=self.mesero)
         
-        # Cliente no autenticado
         self.anon_client = APIClient()
 
     def test_login(self):
@@ -75,10 +71,8 @@ class EmpleadoTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(Empleado.objects.count(), 2)
 
-
 class ProductoTests(APITestCase):
     def setUp(self):
-        # Crear usuarios
         self.admin = Empleado.objects.create_user(
             username='admin',
             password='admin123',
@@ -92,7 +86,6 @@ class ProductoTests(APITestCase):
             email='mesero@test.com'
         )
         
-        # Crear productos de prueba
         self.producto1 = Producto.objects.create(
             nombre='Producto 1',
             categoria='PLATO_PRINCIPAL',
@@ -108,7 +101,6 @@ class ProductoTests(APITestCase):
             estado='FUERA_STOCK'
         )
         
-        # Clientes
         self.admin_client = APIClient()
         self.admin_client.force_authenticate(user=self.admin)
         self.mesero_client = APIClient()
@@ -217,7 +209,6 @@ class ProductoTests(APITestCase):
 
 class PromocionTests(APITestCase):
     def setUp(self):
-        # Crear usuarios
         self.admin = Empleado.objects.create_user(
             username='admin',
             password='admin123',
@@ -231,7 +222,6 @@ class PromocionTests(APITestCase):
             email='mesero@test.com'
         )
         
-        # Crear productos
         self.producto1 = Producto.objects.create(
             nombre='Producto 1',
             categoria='PLATO_PRINCIPAL',
@@ -247,7 +237,6 @@ class PromocionTests(APITestCase):
             estado='DISPONIBLE'
         )
         
-        # Crear promoción
         self.promocion = Promocion.objects.create(
             nombre='Promoción Test',
             descripcion='Descripción promoción',
@@ -258,7 +247,6 @@ class PromocionTests(APITestCase):
         )
         self.promocion.productos.add(self.producto1)
         
-        # Clientes
         self.admin_client = APIClient()
         self.admin_client.force_authenticate(user=self.admin)
         self.mesero_client = APIClient()
