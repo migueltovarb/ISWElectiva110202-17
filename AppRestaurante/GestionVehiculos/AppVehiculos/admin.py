@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Empleado, Producto
-from .models import Promocion
+from .models import Empleado, Producto, Promocion
 from django.utils.html import format_html
 
 @admin.register(Empleado)
@@ -24,4 +23,4 @@ class PromocionAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'descuento', 'fecha_inicio', 'fecha_fin', 'estado', 'esta_activa')
     list_filter = ('estado', 'fecha_inicio', 'fecha_fin')
     search_fields = ('nombre', 'descripcion')
-    filter_horizontal = ('productos',)
+    filter_horizontal = ('productos',)  

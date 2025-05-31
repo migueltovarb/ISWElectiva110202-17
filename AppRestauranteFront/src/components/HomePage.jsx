@@ -24,7 +24,7 @@ const HomePage = () => {
         setPromociones(promosResponse.data);
         const productosData = productosResponse.data;
         setProductos(productosData);
-        setFilteredProductos(productosData.slice(0, 8)); // Mostrar primeros 8 productos inicialmente
+        setFilteredProductos(productosData.slice(0, 8));
         setLoading(false);
       } catch (err) {
         setError('Error al cargar los datos');
@@ -49,7 +49,7 @@ const HomePage = () => {
         (producto.descripcion && producto.descripcion.toLowerCase().includes(searchTerm.toLowerCase()))
   )}
     
-    setFilteredProductos(result.slice(0, 8)); // Mantenemos el límite de 8 productos
+    setFilteredProductos(result.slice(0, 8)); 
   }, [selectedCategory, productos, searchTerm]);
 
   if (loading) return (
@@ -97,7 +97,6 @@ const HomePage = () => {
 
       <div className="container mx-auto py-8 px-4" id="menu-section">
         <h2 className="text-2xl font-bold text-[#81412f] mb-6">Nuestro Menú</h2>
-
         <div className="bg-[#f8f1e9] p-4 rounded-lg shadow-md mb-8">
           <h3 className="text-lg font-semibold text-[#5a3927] mb-4">Filtrar productos</h3>
           

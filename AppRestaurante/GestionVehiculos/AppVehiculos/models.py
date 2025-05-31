@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 import os
 from PIL import Image
 
+
 class Empleado(AbstractUser):
     TIPO_EMPLEADO_CHOICES = [
         ('ADM', 'Administrador'),
@@ -68,7 +69,7 @@ class Producto(models.Model):
     )
     imagen = ProcessedImageField(
         upload_to='productos/',
-        processors=[ResizeToFill(500, 500)],  # Fuerza imagen cuadrada 500x500
+        processors=[ResizeToFill(500, 500)],  
         format='JPEG',
         options={'quality': 80},
         blank=True,
@@ -93,7 +94,7 @@ class Producto(models.Model):
 
     def save(self, *args, **kwargs):
         """Forzar procesamiento de imagen antes de guardar"""
-        self.full_clean()  # Ejecuta todas las validaciones
+        self.full_clean()  
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):

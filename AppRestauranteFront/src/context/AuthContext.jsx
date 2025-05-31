@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import api from '../api/axiosConfig';
+import api from '../api/axiosConfig'; // 👈 Importación correcta
 
 const AuthContext = createContext();
 
@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // Login genérico (para compatibilidad con componentes como Login.jsx)
   const login = async (username, password) => {
     try {
       return await loginEmployee(username, password);
@@ -29,49 +28,65 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Login para empleados
   const loginEmployee = async (username, password) => {
-    const response = await api.post('/auth/token/', { username, password });
-    const userData = {
-      id: response.data.user_id,
-      username: response.data.username,
-      tipo_empleado: response.data.tipo_empleado,
-      is_admin: response.data.is_admin
-    };
-    localStorage.setItem('access_token', response.data.access);
-    localStorage.setItem('refresh_token', response.data.refresh);
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('userType', 'employee');
-    setUser(userData);
-    setUserType('employee');
-    return userData;
+    try {
+      const response = await api.post('/auth/token/', { username, password });
+      const userData = {
+        id: response.data.user_id,
+        username: response.data.username,
+        tipo_empleado: response.data.tipo_empleado,
+        is_admin: response.data.is_admin
+      };
+      
+      localStorage.setItem('access_token', response.data.access);
+      localStorage.setItem('refresh_token', response.data.refresh);
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('userType', 'employee');
+      
+      setUser(userData);
+      setUserType('employee');
+      return userData;
+    } catch (error) {
+      console.error('Error en loginEmployee:', error);
+      throw error;
+    }
   };
 
-  // Login para clientes
   const loginCustomer = async (username, password) => {
-    const response = await api.post('/clientes/login/', { usuario: username, password });
-    const userData = {
-      id: response.data.user_id,
-      username: response.data.usuario,
-      email: response.data.email
-    };
-    localStorage.setItem('access_token', response.data.access);
-    localStorage.setItem('refresh_token', response.data.refresh);
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('userType', 'customer');
-    setUser(userData);
-    setUserType('customer');
-    return userData;
+    try {
+      const response = await api.post('/clientes/login/', { usuario: username, password });
+      const userData = {
+        id: response.data.user_id,
+        username: response.data.usuario,
+        email: response.data.email
+      };
+      
+      localStorage.setItem('access_token', response.data.access);
+      localStorage.setItem('refresh_token', response.data.refresh);
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('userType', 'customer');
+      
+      setUser(userData);
+      setUserType('customer');
+      return userData;
+    } catch (error) {
+      console.error('Error en loginCustomer:', error);
+      throw error;
+    }
   };
 
-  // Registro para clientes
   const registerCustomer = async (username, email, password) => {
-    const response = await api.post('/clientes/registro/', {
-      usuario: username,
-      email: email,
-      password: password
-    });
-    return response.data;
+    try {
+      const response = await api.post('/clientes/registro/', {
+        usuario: username,
+        email: email,
+        password: password
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error en registerCustomer:', error);
+      throw error;
+    }
   };
 
   const logout = () => {
@@ -88,7 +103,7 @@ export const AuthProvider = ({ children }) => {
       user, 
       loading, 
       userType,
-      login,              // 👈 función genérica
+      login,
       loginEmployee, 
       loginCustomer,
       registerCustomer,

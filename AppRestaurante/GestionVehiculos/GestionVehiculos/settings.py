@@ -1,4 +1,5 @@
 import os
+import sys  # Añade esta importación al inicio del archivo
 from pathlib import Path
 from datetime import timedelta
 
@@ -53,18 +54,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'GestionVehiculos.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gestion_vehiculos_db',
-        'USER': 'admin_vehiculos',
-        'PASSWORD': 'vehiculos123', 
-        'HOST': 'db',
-        'PORT': '5432',
+# Configuración de bases de datos
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'gestion_vehiculos_db',
+            'USER': 'admin_vehiculos',
+            'PASSWORD': 'vehiculos123',  
+            'HOST': 'db',
+            'PORT': '5432',
+        }
+    }
 
-# Validadores de contraseña
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -77,6 +86,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+# Archivos estáticos y multimedia
 STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

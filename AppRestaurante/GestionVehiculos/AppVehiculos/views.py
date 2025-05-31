@@ -121,11 +121,13 @@ class PromocionAPIView(generics.ListCreateAPIView):
     serializer_class = PromocionSerializer
     permission_classes = [IsAdminOrMeseroOrReadOnly]
 
-    def perform_create(self, serializer):
-        if self.request.user.is_admin():
-            serializer.save()
-        else:
-            raise PermissionDenied("Solo los administradores pueden crear promociones")
+    def create(self, request, *args, **kwargs):
+        if not request.user.is_admin():
+            return Response(
+                {"detail": "Solo administradores pueden crear promociones"},
+                status=status.HTTP_403_FORBIDDEN
+            )
+        return super().create(request, *args, **kwargs)
 
 class PromocionDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Promocion.objects.all()

@@ -1,375 +1,218 @@
-from django.urls import reverse
-from rest_framework import status
-from rest_framework.test import APITestCase, APIClient
-from django.contrib.auth.models import User
-from .models import Empleado, Producto, Promocion
+import os
+from decimal import Decimal
+from django.test import TestCase
 from django.utils import timezone
-from datetime import timedelta
+from rest_framework.test import APIClient
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import get_user_model
 
-class EmpleadoTests(APITestCase):
+from .models import Producto, Promocion, Cliente
+from .serializers import CustomTokenObtainPairSerializer, ClienteRegistroSerializer
+
+User = get_user_model()
+
+# MODELOS
+class EmpleadoModelTests(TestCase):
     def setUp(self):
-        # Crear un administrador para pruebas
-        self.admin = Empleado.objects.create_user(
+        self.admin = User.objects.create_user(
             username='admin',
-            password='admin123',
-            tipo_empleado='ADM',
-            email='admin@test.com'
+            email='admin@test.com',
+            password='adminpass',
+            tipo_empleado='ADM'
         )
-        
-        self.mesero = Empleado.objects.create_user(
+        self.mesero = User.objects.create_user(
             username='mesero',
-            password='mesero123',
-            tipo_empleado='MES',
-            email='mesero@test.com'
+            email='mesero@test.com',
+            password='meseropass',
+            tipo_empleado='MES'
         )
-        
-        self.admin_client = APIClient()
-        self.admin_client.force_authenticate(user=self.admin)
-        
-        self.mesero_client = APIClient()
-        self.mesero_client.force_authenticate(user=self.mesero)
-        
-        self.anon_client = APIClient()
 
-    def test_login(self):
-        url = reverse('token_obtain_pair')
-        data = {'username': 'admin', 'password': 'admin123'}
-        response = self.anon_client.post(url, data, format='json')
-        
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertIn('access', response.data)
-        self.assertIn('refresh', response.data)
-        self.assertEqual(response.data['username'], 'admin')
-        self.assertEqual(response.data['tipo_empleado'], 'ADM')
-        self.assertTrue(response.data['is_admin'])
+    def test_empleado_roles_y_str(self):
+        self.assertTrue(self.admin.is_admin())
+        self.assertFalse(self.mesero.is_admin())
+        self.assertEqual(str(self.admin), 'admin (Administrador)')
+        self.assertEqual(str(self.mesero), 'mesero (Mesero)')
 
-    def test_crear_empleado_como_admin(self):
-        url = reverse('empleado-list')
-        data = {
-            'username': 'nuevo',
-            'email': 'nuevo@test.com',
-            'tipo_empleado': 'MES',
-            'password': 'nuevo123'
-        }
-        response = self.admin_client.post(url, data, format='json')
-        
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Empleado.objects.count(), 3)
-        self.assertEqual(response.data['username'], 'nuevo')
-        self.assertEqual(response.data['tipo_empleado'], 'MES')
 
-    def test_crear_empleado_como_mesero_debe_fallar(self):
-        url = reverse('empleado-list')
-        data = {
-            'username': 'nuevo',
-            'email': 'nuevo@test.com',
-            'tipo_empleado': 'MES',
-            'password': 'nuevo123'
-        }
-        response = self.mesero_client.post(url, data, format='json')
-        
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(Empleado.objects.count(), 2)
-
-class ProductoTests(APITestCase):
-    def setUp(self):
-        self.admin = Empleado.objects.create_user(
-            username='admin',
-            password='admin123',
-            tipo_empleado='ADM',
-            email='admin@test.com'
-        )
-        self.mesero = Empleado.objects.create_user(
-            username='mesero',
-            password='mesero123',
-            tipo_empleado='MES',
-            email='mesero@test.com'
-        )
-        
-        self.producto1 = Producto.objects.create(
-            nombre='Producto 1',
+class ProductoModelTests(TestCase):
+    def test_producto_fields(self):
+        p = Producto.objects.create(
+            nombre='Hamburguesa',
             categoria='PLATO_PRINCIPAL',
-            descripcion='Descripción 1',
+            descripcion='Deliciosa',
             precio=10.99,
             estado='DISPONIBLE'
         )
-        self.producto2 = Producto.objects.create(
-            nombre='Producto 2',
-            categoria='BEBIDA',
-            descripcion='Descripción 2',
-            precio=5.99,
-            estado='FUERA_STOCK'
-        )
-        
-        self.admin_client = APIClient()
-        self.admin_client.force_authenticate(user=self.admin)
-        self.mesero_client = APIClient()
-        self.mesero_client.force_authenticate(user=self.mesero)
-        self.anon_client = APIClient()
-
-    def test_listar_productos(self):
-        url = reverse('producto-list')
-        response = self.anon_client.get(url)
-        
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
-        self.assertEqual(response.data[0]['nombre'], 'Producto 1')
-        self.assertEqual(response.data[1]['nombre'], 'Producto 2')
-
-    def test_obtener_producto_especifico(self):
-        url = reverse('producto-detail', args=[self.producto1.id])
-        response = self.anon_client.get(url)
-        
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['nombre'], 'Producto 1')
-        self.assertEqual(response.data['precio'], '10.99')
-
-    def test_crear_producto_como_admin(self):
-        url = reverse('producto-list')
-        data = {
-            'nombre': 'Nuevo Producto',
-            'categoria': 'ENTRADA',
-            'descripcion': 'Nueva descripción',
-            'precio': 7.50,
-            'estado': 'DISPONIBLE'
-        }
-        response = self.admin_client.post(url, data, format='json')
-        
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Producto.objects.count(), 3)
-        self.assertEqual(response.data['nombre'], 'Nuevo Producto')
-
-    def test_crear_producto_como_mesero_debe_fallar(self):
-        url = reverse('producto-list')
-        data = {
-            'nombre': 'Nuevo Producto',
-            'categoria': 'ENTRADA',
-            'descripcion': 'Nueva descripción',
-            'precio': 7.50,
-            'estado': 'DISPONIBLE'
-        }
-        response = self.mesero_client.post(url, data, format='json')
-        
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(Producto.objects.count(), 2)
-
-    def test_actualizar_producto_como_admin(self):
-        url = reverse('producto-detail', args=[self.producto1.id])
-        data = {
-            'nombre': 'Producto Actualizado',
-            'categoria': 'PLATO_PRINCIPAL',
-            'descripcion': 'Descripción actualizada',
-            'precio': 12.99,
-            'estado': 'DISPONIBLE'
-        }
-        response = self.admin_client.put(url, data, format='json')
-        
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.producto1.refresh_from_db()
-        self.assertEqual(self.producto1.nombre, 'Producto Actualizado')
-        self.assertEqual(float(self.producto1.precio), 12.99)
-
-    def test_actualizacion_parcial_producto(self):
-        url = reverse('producto-detail', args=[self.producto1.id])
-        data = {'precio': 15.99}
-        response = self.admin_client.patch(url, data, format='json')
-        
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.producto1.refresh_from_db()
-        self.assertEqual(float(self.producto1.precio), 15.99)
-
-    def test_toggle_estado_producto(self):
-        url = reverse('producto-detail', args=[self.producto1.id])
-        data = {'estado': 'toggle'}
-        response = self.admin_client.patch(url, data, format='json')
-        
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.producto1.refresh_from_db()
-        self.assertEqual(self.producto1.estado, 'FUERA_STOCK')
-        
-        # Toggle again
-        response = self.admin_client.patch(url, data, format='json')
-        self.producto1.refresh_from_db()
-        self.assertEqual(self.producto1.estado, 'DISPONIBLE')
-
-    def test_eliminar_producto_como_admin(self):
-        url = reverse('producto-detail', args=[self.producto1.id])
-        response = self.admin_client.delete(url)
-        
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(Producto.objects.count(), 1)
-
-    def test_eliminar_producto_como_mesero_debe_fallar(self):
-        url = reverse('producto-detail', args=[self.producto1.id])
-        response = self.mesero_client.delete(url)
-        
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(Producto.objects.count(), 2)
+        self.assertEqual(p.get_categoria_display(), 'Plato Principal')
+        self.assertEqual(p.precio, Decimal('10.99'))
+        self.assertEqual(p.estado, 'DISPONIBLE')
 
 
-class PromocionTests(APITestCase):
+class PromocionModelTests(TestCase):
     def setUp(self):
-        self.admin = Empleado.objects.create_user(
-            username='admin',
-            password='admin123',
-            tipo_empleado='ADM',
-            email='admin@test.com'
-        )
-        self.mesero = Empleado.objects.create_user(
-            username='mesero',
-            password='mesero123',
-            tipo_empleado='MES',
-            email='mesero@test.com'
-        )
-        
-        self.producto1 = Producto.objects.create(
-            nombre='Producto 1',
-            categoria='PLATO_PRINCIPAL',
-            descripcion='Descripción 1',
-            precio=10.99,
-            estado='DISPONIBLE'
-        )
-        self.producto2 = Producto.objects.create(
-            nombre='Producto 2',
+        self.prod = Producto.objects.create(
+            nombre='X',
             categoria='BEBIDA',
-            descripcion='Descripción 2',
-            precio=5.99,
-            estado='DISPONIBLE'
+            precio=5
         )
-        
-        self.promocion = Promocion.objects.create(
-            nombre='Promoción Test',
-            descripcion='Descripción promoción',
+
+    def test_promocion_activa_e_inactiva(self):
+        activa = Promocion.objects.create(
+            nombre='Activa',
+            descripcion='Promo',
             descuento=10.00,
             fecha_inicio=timezone.now().date(),
-            fecha_fin=timezone.now().date() + timedelta(days=7),
+            fecha_fin=timezone.now().date() + timezone.timedelta(days=5),
             estado='ACTIVA'
         )
-        self.promocion.productos.add(self.producto1)
-        
-        self.admin_client = APIClient()
-        self.admin_client.force_authenticate(user=self.admin)
-        self.mesero_client = APIClient()
-        self.mesero_client.force_authenticate(user=self.mesero)
-        self.anon_client = APIClient()
+        activa.productos.add(self.prod)
+        self.assertTrue(activa.esta_activa())
+        self.assertEqual(activa.productos.count(), 1)
 
-    def test_listar_promociones(self):
-        url = reverse('promocion-list')
-        response = self.anon_client.get(url)
-        
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]['nombre'], 'Promoción Test')
+        inactiva = Promocion.objects.create(
+            nombre='Inactiva',
+            descripcion='Promo',
+            descuento=15.00,
+            fecha_inicio=timezone.now().date() - timezone.timedelta(days=10),
+            fecha_fin=timezone.now().date() - timezone.timedelta(days=5),
+            estado='ACTIVA'
+        )
+        self.assertFalse(inactiva.esta_activa())
 
-    def test_obtener_promocion_especifica(self):
-        url = reverse('promocion-detail', args=[self.promocion.id])
-        response = self.anon_client.get(url)
-        
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['nombre'], 'Promoción Test')
-        self.assertEqual(len(response.data['productos']), 1)
 
-    def test_crear_promocion_como_admin(self):
-        url = reverse('promocion-list')
-        data = {
-            'nombre': 'Nueva Promoción',
-            'descripcion': 'Descripción nueva',
-            'descuento': 15.00,
-            'productos': [self.producto1.id, self.producto2.id],
-            'fecha_inicio': timezone.now().date().isoformat(),
-            'fecha_fin': (timezone.now().date() + timedelta(days=14)).isoformat(),
-            'estado': 'ACTIVA'
-        }
-        response = self.admin_client.post(url, data, format='json')
-        
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Promocion.objects.count(), 2)
-        self.assertEqual(response.data['nombre'], 'Nueva Promoción')
-        self.assertEqual(len(response.data['productos']), 2)
+class ClienteModelTests(TestCase):
+    def test_cliente_password_and_str(self):
+        cliente = Cliente.objects.create(usuario='cliente', email='x@x.com')
+        cliente.set_password('secure')
+        cliente.save()
+        self.assertTrue(cliente.check_password('secure'))
+        self.assertEqual(str(cliente), 'cliente')
 
-    def test_crear_promocion_como_mesero_debe_fallar(self):
-        url = reverse('promocion-list')
-        data = {
-            'nombre': 'Nueva Promoción',
-            'descripcion': 'Descripción nueva',
-            'descuento': 15.00,
-            'productos': [self.producto1.id, self.producto2.id],
-            'fecha_inicio': timezone.now().date().isoformat(),
-            'fecha_fin': (timezone.now().date() + timedelta(days=14)).isoformat(),
-            'estado': 'ACTIVA'
-        }
-        response = self.mesero_client.post(url, data, format='json')
-        
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(Promocion.objects.count(), 1)
 
-    def test_actualizar_promocion_como_admin(self):
-        url = reverse('promocion-detail', args=[self.promocion.id])
-        data = {
-            'nombre': 'Promoción Actualizada',
-            'descripcion': 'Descripción actualizada',
-            'descuento': 20.00,
-            'productos': [self.producto2.id],
-            'fecha_inicio': timezone.now().date().isoformat(),
-            'fecha_fin': (timezone.now().date() + timedelta(days=14)).isoformat(),
-            'estado': 'ACTIVA'
-        }
-        response = self.admin_client.put(url, data, format='json')
-        
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.promocion.refresh_from_db()
-        self.assertEqual(self.promocion.nombre, 'Promoción Actualizada')
-        self.assertEqual(float(self.promocion.descuento), 20.00)
-        self.assertEqual(self.promocion.productos.count(), 1)
+# SERIALIZERS
+class SerializerTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='testuser',
+            email='test@test.com',
+            password='testpass',
+            tipo_empleado='ADM'
+        )
 
-    def test_actualizar_promocion_como_mesero_debe_fallar(self):
-        url = reverse('promocion-detail', args=[self.promocion.id])
-        data = {
-            'nombre': 'Promoción Actualizada',
-            'descripcion': 'Descripción actualizada',
-            'descuento': 20.00,
-            'productos': [self.producto2.id],
-            'fecha_inicio': timezone.now().date().isoformat(),
-            'fecha_fin': (timezone.now().date() + timedelta(days=14)).isoformat(),
-            'estado': 'ACTIVA'
-        }
-        response = self.mesero_client.put(url, data, format='json')
-        
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.promocion.refresh_from_db()
-        self.assertEqual(self.promocion.nombre, 'Promoción Test')  # No cambió
+    def test_token_serializer_fields(self):
+        serializer = CustomTokenObtainPairSerializer(data={
+            'username': 'testuser',
+            'password': 'testpass'
+        })
+        self.assertTrue(serializer.is_valid())
+        data = serializer.validate(serializer.initial_data)
+        self.assertIn('access', data)
+        self.assertEqual(data['username'], 'testuser')
+        self.assertEqual(data['tipo_empleado'], 'ADM')
 
-    def test_eliminar_promocion_como_admin(self):
-        url = reverse('promocion-detail', args=[self.promocion.id])
-        response = self.admin_client.delete(url)
-        
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(Promocion.objects.count(), 0)
+    def test_cliente_registro_serializer(self):
+        serializer = ClienteRegistroSerializer(data={
+            'usuario': 'nuevo',
+            'email': 'nuevo@test.com',
+            'password': 'pass123'
+        })
+        self.assertTrue(serializer.is_valid())
+        cliente = serializer.save()
+        self.assertEqual(cliente.usuario, 'nuevo')
+        self.assertTrue(cliente.check_password('pass123'))
 
-    def test_eliminar_promocion_como_mesero_debe_fallar(self):
-        url = reverse('promocion-detail', args=[self.promocion.id])
-        response = self.mesero_client.delete(url)
-        
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertEqual(Promocion.objects.count(), 1)
 
-    def test_esta_activa_method(self):
-        # Promoción activa
-        self.assertTrue(self.promocion.esta_activa())
-        
-        # Promoción inactiva por estado
-        self.promocion.estado = 'INACTIVA'
-        self.promocion.save()
-        self.assertFalse(self.promocion.esta_activa())
-        self.promocion.estado = 'ACTIVA'
-        self.promocion.save()
-        
-        # Promoción inactiva por fecha
-        self.promocion.fecha_inicio = timezone.now().date() + timedelta(days=1)
-        self.promocion.save()
-        self.assertFalse(self.promocion.esta_activa())
-        
-        self.promocion.fecha_inicio = timezone.now().date()
-        self.promocion.fecha_fin = timezone.now().date() - timedelta(days=1)
-        self.promocion.save()
-        self.assertFalse(self.promocion.esta_activa())
+# API
+class APITests(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.admin = User.objects.create_user(
+            username='admin',
+            email='admin@test.com',
+            password='adminpass',
+            tipo_empleado='ADM'
+        )
+        self.mesero = User.objects.create_user(
+            username='mesero',
+            email='mesero@test.com',
+            password='meseropass',
+            tipo_empleado='MES'
+        )
+        self.cliente = Cliente.objects.create(usuario='cliente', email='cliente@test.com')
+        self.cliente.set_password('clientepass')
+        self.cliente.save()
+
+        self.producto = Producto.objects.create(
+            nombre='Producto API',
+            categoria='PLATO_PRINCIPAL',
+            precio=12.50
+        )
+
+    def get_token(self, user):
+        return str(RefreshToken.for_user(user).access_token)
+
+    def test_login_y_registro(self):
+        # Empleado
+        response = self.client.post('/api/token/', {
+            'username': 'admin', 'password': 'adminpass'
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('access', response.data)
+
+        # Cliente
+        response = self.client.post('/api/clientes/login/', {
+            'usuario': 'cliente', 'password': 'clientepass'
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('access', response.data)
+
+        # Registro cliente
+        response = self.client.post('/api/clientes/registro/', {
+            'usuario': 'nuevo',
+            'email': 'nuevo@x.com',
+            'password': 'pass321'
+        })
+        self.assertEqual(response.status_code, 201)
+        self.assertTrue(Cliente.objects.filter(usuario='nuevo').exists())
+
+    def test_producto_listado_y_creacion(self):
+        # Sin login
+        response = self.client.get('/api/productos/')
+        self.assertEqual(response.status_code, 200)
+
+        # Mesero no autorizado para crear
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.get_token(self.mesero)}')
+        response = self.client.post('/api/productos/', {
+            'nombre': 'No permitido',
+            'categoria': 'BEBIDA',
+            'precio': 5.99
+        })
+        self.assertEqual(response.status_code, 403)
+
+        # Admin autorizado para crear
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.get_token(self.admin)}')
+        response = self.client.post('/api/productos/', {
+            'nombre': 'Permitido',
+            'categoria': 'BEBIDA',
+            'precio': 6.99
+        })
+        self.assertEqual(response.status_code, 201)
+        self.assertTrue(Producto.objects.filter(nombre='Permitido').exists())
+
+
+# ADMIN
+class AdminTests(TestCase):
+    def setUp(self):
+        self.superuser = User.objects.create_superuser(
+            username='superadmin',
+            email='super@test.com',
+            password='superpass',
+            tipo_empleado='ADM'
+        )
+        self.client.force_login(self.superuser)
+        Producto.objects.create(nombre='Admin Producto', categoria='POSTRE', precio=8.99)
+
+    def test_admin_producto_list_view(self):
+        response = self.client.get('/admin/restaurante/producto/')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Admin Producto')

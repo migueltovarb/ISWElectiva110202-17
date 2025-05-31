@@ -13,16 +13,16 @@ const PromocionCard = ({ promocion, isAdmin, onEdit, onDelete }) => {
   const diasRestantes = Math.ceil((fechaFin - hoy) / (1000 * 60 * 60 * 24));
 
   const colors = {
-    primary: '#D35400',     
-    secondary: '#E67E22',   
-    accent: '#E74C3C',      
-    light: '#FDEBD0',   
-    dark: '#7E5109',      
-    background: '#F5CBA7', 
-    text: '#4E342E',      
-    success: '#27AE60',     
-    warning: '#F39C12',     
-    danger: '#C0392B'      
+    primary: '#D35400',     // Naranja café oscuro
+    secondary: '#E67E22',   // Naranja cálido
+    accent: '#E74C3C',      // Rojo vibrante
+    light: '#FDEBD0',       // Café claro
+    dark: '#7E5109',        // Café oscuro
+    background: '#F5CBA7',  // Fondo café claro
+    text: '#4E342E',        // Texto café oscuro
+    success: '#27AE60',     // Verde para estado activo
+    warning: '#F39C12',     // Amarillo/naranja para advertencias
+    danger: '#C0392B'       // Rojo oscuro para eliminar
   };
 
   useEffect(() => {
@@ -257,7 +257,6 @@ const PromocionCard = ({ promocion, isAdmin, onEdit, onDelete }) => {
         )}
       </div>
 
-      {/* Fechas */}
       <div style={{ 
         marginTop: '12px', 
         fontSize: '14px',

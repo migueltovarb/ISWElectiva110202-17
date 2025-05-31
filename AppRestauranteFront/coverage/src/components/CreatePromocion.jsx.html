@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for VehicleList.jsx</title>
+    <title>Code coverage report for src/components/CreatePromocion.jsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prettify.css" />
-    <link rel="stylesheet" href="base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> VehicleList.jsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/components</a> CreatePromocion.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/278</span>
+                <span class='fraction'>0/295</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/278</span>
+                <span class='fraction'>0/295</span>
             </div>
         
             
@@ -340,7 +340,24 @@
 <a name='L275'></a><a href='#L275'>275</a>
 <a name='L276'></a><a href='#L276'>276</a>
 <a name='L277'></a><a href='#L277'>277</a>
-<a name='L278'></a><a href='#L278'>278</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a>
+<a name='L283'></a><a href='#L283'>283</a>
+<a name='L284'></a><a href='#L284'>284</a>
+<a name='L285'></a><a href='#L285'>285</a>
+<a name='L286'></a><a href='#L286'>286</a>
+<a name='L287'></a><a href='#L287'>287</a>
+<a name='L288'></a><a href='#L288'>288</a>
+<a name='L289'></a><a href='#L289'>289</a>
+<a name='L290'></a><a href='#L290'>290</a>
+<a name='L291'></a><a href='#L291'>291</a>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a>
+<a name='L294'></a><a href='#L294'>294</a>
+<a name='L295'></a><a href='#L295'>295</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -617,300 +634,334 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import { useState, useEffect } from "react";</span></span></span>
-<span class="cstat-no" title="statement not covered" >import { useAuth } from "../context/AuthContext";</span>
-<span class="cstat-no" title="statement not covered" >import api from "../api/axiosConfig";</span>
-<span class="cstat-no" title="statement not covered" >import AddVehicle from "./AddVehicle";</span>
-<span class="cstat-no" title="statement not covered" >import EditVehicle from "./EditVehicle";</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import React, { useState, useEffect } from 'react';</span></span></span>
+<span class="cstat-no" title="statement not covered" >import { useAuth } from '../context/AuthContext';</span>
+<span class="cstat-no" title="statement not covered" >import { useNavigate } from 'react-router-dom';</span>
+<span class="cstat-no" title="statement not covered" >import axios from '../api/axiosConfig';</span>
+<span class="cstat-no" title="statement not covered" >import '../components/Auth/Auth.css';</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >const CATEGORIAS = [</span>
-<span class="cstat-no" title="statement not covered" >  { id: 'TODAS', nombre: 'Todas las categorías' },</span>
-<span class="cstat-no" title="statement not covered" >  { id: 'ENTRADA', nombre: 'Entradas' },</span>
-<span class="cstat-no" title="statement not covered" >  { id: 'PLATO_PRINCIPAL', nombre: 'Platos Principales' },</span>
-<span class="cstat-no" title="statement not covered" >  { id: 'BEBIDA', nombre: 'Bebidas' },</span>
-<span class="cstat-no" title="statement not covered" >  { id: 'POSTRE', nombre: 'Postres' },</span>
-<span class="cstat-no" title="statement not covered" >  { id: 'ADICION', nombre: 'Adiciones' }</span>
-<span class="cstat-no" title="statement not covered" >];</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >const VehicleList = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >const CreatePromocion = ({ onClose, onCreate }) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  const { user } = useAuth();</span>
-<span class="cstat-no" title="statement not covered" >  const [products, setProducts] = useState([]);</span>
-<span class="cstat-no" title="statement not covered" >  const [filteredProducts, setFilteredProducts] = useState([]);</span>
-<span class="cstat-no" title="statement not covered" >  const [loading, setLoading] = useState(true);</span>
-<span class="cstat-no" title="statement not covered" >  const [showAddProduct, setShowAddProduct] = useState(false);</span>
-<span class="cstat-no" title="statement not covered" >  const [selectedProduct, setSelectedProduct] = useState(null);</span>
-<span class="cstat-no" title="statement not covered" >  const [selectedCategory, setSelectedCategory] = useState('TODAS');</span>
-<span class="cstat-no" title="statement not covered" >  const [searchTerm, setSearchTerm] = useState('');</span>
-<span class="cstat-no" title="statement not covered" >  const [isDropdownOpen, setIsDropdownOpen] = useState(false);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  // Variables de permisos</span>
-<span class="cstat-no" title="statement not covered" >  const canEdit = user?.is_admin || user?.tipo_empleado === 'MES';</span>
-<span class="cstat-no" title="statement not covered" >  const canAdd = user?.is_admin;</span>
-<span class="cstat-no" title="statement not covered" >  const canDelete = user?.is_admin;</span>
+<span class="cstat-no" title="statement not covered" >  const navigate = useNavigate();</span>
+<span class="cstat-no" title="statement not covered" >  const [productos, setProductos] = useState([]);</span>
+<span class="cstat-no" title="statement not covered" >  const [isLoading, setIsLoading] = useState(false);</span>
+<span class="cstat-no" title="statement not covered" >  const [formData, setFormData] = useState({</span>
+<span class="cstat-no" title="statement not covered" >    nombre: '',</span>
+<span class="cstat-no" title="statement not covered" >    descripcion: '',</span>
+<span class="cstat-no" title="statement not covered" >    descuento: '',</span>
+<span class="cstat-no" title="statement not covered" >    productos: [],</span>
+<span class="cstat-no" title="statement not covered" >    fecha_inicio: new Date().toISOString().split('T')[0],</span>
+<span class="cstat-no" title="statement not covered" >    fecha_fin: '',</span>
+<span class="cstat-no" title="statement not covered" >    estado: 'ACTIVA'</span>
+<span class="cstat-no" title="statement not covered" >  });</span>
+<span class="cstat-no" title="statement not covered" >  const [error, setError] = useState(null);</span>
+<span class="cstat-no" title="statement not covered" >  const [touched, setTouched] = useState({</span>
+<span class="cstat-no" title="statement not covered" >    nombre: false,</span>
+<span class="cstat-no" title="statement not covered" >    descripcion: false,</span>
+<span class="cstat-no" title="statement not covered" >    descuento: false,</span>
+<span class="cstat-no" title="statement not covered" >    fecha_fin: false</span>
+<span class="cstat-no" title="statement not covered" >  });</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const fetchProducts = async () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const fetchProductos = async () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      setIsLoading(true);</span>
 <span class="cstat-no" title="statement not covered" >      try {</span>
-<span class="cstat-no" title="statement not covered" >        const response = await api.get('/productos/');</span>
-<span class="cstat-no" title="statement not covered" >        setProducts(response.data);</span>
-<span class="cstat-no" title="statement not covered" >        setFilteredProducts(response.data);</span>
-<span class="cstat-no" title="statement not covered" >      } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >        console.error("Error fetching products:", error);</span>
+<span class="cstat-no" title="statement not covered" >        const response = await axios.get('/productos/');</span>
+<span class="cstat-no" title="statement not covered" >        setProductos(response.data);</span>
+<span class="cstat-no" title="statement not covered" >      } catch (err) {</span>
+<span class="cstat-no" title="statement not covered" >        setError('Error al cargar los productos. Intente nuevamente.');</span>
+<span class="cstat-no" title="statement not covered" >        console.error(err);</span>
 <span class="cstat-no" title="statement not covered" >      } finally {</span>
-<span class="cstat-no" title="statement not covered" >        setLoading(false);</span>
+<span class="cstat-no" title="statement not covered" >        setIsLoading(false);</span>
 <span class="cstat-no" title="statement not covered" >      }</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
-<span class="cstat-no" title="statement not covered" >    fetchProducts();</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    fetchProductos();</span>
 <span class="cstat-no" title="statement not covered" >  }, []);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    let result = products;</span>
+<span class="cstat-no" title="statement not covered" >  const handleChange = (e) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const { name, value } = e.target;</span>
+<span class="cstat-no" title="statement not covered" >    setFormData(prev =&gt; ({</span>
+<span class="cstat-no" title="statement not covered" >      ...prev,</span>
+<span class="cstat-no" title="statement not covered" >      [name]: value</span>
+<span class="cstat-no" title="statement not covered" >    }));</span>
 <span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >    if (selectedCategory !== 'TODAS') {</span>
-<span class="cstat-no" title="statement not covered" >      result = result.filter(product =&gt; product.categoria === selectedCategory);</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >    if (searchTerm) {</span>
-<span class="cstat-no" title="statement not covered" >      result = result.filter(product =&gt; </span>
-<span class="cstat-no" title="statement not covered" >        product.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||</span>
-<span class="cstat-no" title="statement not covered" >        product.descripcion.toLowerCase().includes(searchTerm.toLowerCase())</span>
-<span class="cstat-no" title="statement not covered" >      );</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >    setFilteredProducts(result);</span>
-<span class="cstat-no" title="statement not covered" >  }, [selectedCategory, products, searchTerm]);</span>
+<span class="cstat-no" title="statement not covered" >    setTouched(prev =&gt; ({ ...prev, [name]: true }));</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const handleDelete = async (id) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    if (!window.confirm("¿Estás seguro de eliminar este producto?")) return;</span>
+<span class="cstat-no" title="statement not covered" >  const handleProductoChange = (productoId) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    setFormData(prev =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      const newProductos = prev.productos.includes(productoId)</span>
+<span class="cstat-no" title="statement not covered" >        ? prev.productos.filter(id =&gt; id !== productoId)</span>
+<span class="cstat-no" title="statement not covered" >        : [...prev.productos, productoId];</span>
+<span class="cstat-no" title="statement not covered" >      return { ...prev, productos: newProductos };</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  const validateForm = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const errors = {};</span>
 <span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >    if (!formData.nombre.trim()) errors.nombre = 'El nombre es requerido';</span>
+<span class="cstat-no" title="statement not covered" >    if (!formData.descripcion.trim()) errors.descripcion = 'La descripción es requerida';</span>
+<span class="cstat-no" title="statement not covered" >    if (!formData.descuento) errors.descuento = 'El descuento es requerido';</span>
+<span class="cstat-no" title="statement not covered" >    if (formData.descuento &lt; 1 || formData.descuento &gt; 100) errors.descuento = 'El descuento debe ser entre 1% y 100%';</span>
+<span class="cstat-no" title="statement not covered" >    if (!formData.fecha_fin) errors.fecha_fin = 'La fecha de fin es requerida';</span>
+<span class="cstat-no" title="statement not covered" >    if (formData.productos.length === 0) errors.productos = 'Seleccione al menos un producto';</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >    return Object.keys(errors).length === 0 ? null : errors;</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  const handleSubmit = async (e) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    e.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >    setError(null);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >    if (!user?.is_admin) {</span>
+<span class="cstat-no" title="statement not covered" >      setError('Solo los administradores pueden crear promociones');</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    const formErrors = validateForm();</span>
+<span class="cstat-no" title="statement not covered" >    if (formErrors) {</span>
+<span class="cstat-no" title="statement not covered" >      setError('Por favor complete todos los campos correctamente');</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      await api.delete(`/productos/${id}/`);</span>
-<span class="cstat-no" title="statement not covered" >      setProducts(products.filter(product =&gt; product.id !== id));</span>
-<span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >      console.error("Error deleting product:", error);</span>
-<span class="cstat-no" title="statement not covered" >      alert("No se pudo eliminar el producto");</span>
+<span class="cstat-no" title="statement not covered" >      setIsLoading(true);</span>
+<span class="cstat-no" title="statement not covered" >      const response = await axios.post('/promociones/', {</span>
+<span class="cstat-no" title="statement not covered" >        ...formData,</span>
+<span class="cstat-no" title="statement not covered" >        descuento: parseFloat(formData.descuento)</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >      onCreate(response.data);</span>
+<span class="cstat-no" title="statement not covered" >      onClose();</span>
+<span class="cstat-no" title="statement not covered" >    } catch (err) {</span>
+<span class="cstat-no" title="statement not covered" >      setError(err.response?.data?.message || 'Error al crear la promoción. Intente nuevamente.');</span>
+<span class="cstat-no" title="statement not covered" >      console.error(err);</span>
+<span class="cstat-no" title="statement not covered" >    } finally {</span>
+<span class="cstat-no" title="statement not covered" >      setIsLoading(false);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const handleAddProduct = (newProduct) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setProducts([...products, newProduct]);</span>
-<span class="cstat-no" title="statement not covered" >    setShowAddProduct(false);</span>
+<span class="cstat-no" title="statement not covered" >  const handleBlur = (e) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const { name } = e.target;</span>
+<span class="cstat-no" title="statement not covered" >    setTouched(prev =&gt; ({ ...prev, [name]: true }));</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const handleUpdateProduct = (updatedProduct) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setProducts(products.map(product =&gt; </span>
-<span class="cstat-no" title="statement not covered" >      product.id === updatedProduct.id ? updatedProduct : product</span>
-<span class="cstat-no" title="statement not covered" >    ));</span>
-<span class="cstat-no" title="statement not covered" >    setSelectedProduct(null);</span>
+<span class="cstat-no" title="statement not covered" >  const getFieldError = (fieldName) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (!touched[fieldName]) return null;</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >    if (!formData[fieldName] &amp;&amp; fieldName !== 'descuento') {</span>
+<span class="cstat-no" title="statement not covered" >      return 'Este campo es requerido';</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >    if (fieldName === 'descuento') {</span>
+<span class="cstat-no" title="statement not covered" >      if (!formData.descuento) return 'Este campo es requerido';</span>
+<span class="cstat-no" title="statement not covered" >      if (formData.descuento &lt; 1 || formData.descuento &gt; 100) {</span>
+<span class="cstat-no" title="statement not covered" >        return 'El descuento debe ser entre 1% y 100%';</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >    if (fieldName === 'fecha_fin' &amp;&amp; formData.fecha_fin &lt; formData.fecha_inicio) {</span>
+<span class="cstat-no" title="statement not covered" >      return 'La fecha fin no puede ser anterior a la fecha inicio';</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >    return null;</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const getEstadoStyles = (estado) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    return estado === 'DISPONIBLE' </span>
-<span class="cstat-no" title="statement not covered" >      ? 'bg-green-100 text-green-800 border border-green-200' </span>
-<span class="cstat-no" title="statement not covered" >      : 'bg-red-100 text-red-800 border border-red-200';</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const getCategoryColor = (categoria) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const colors = {</span>
-<span class="cstat-no" title="statement not covered" >      'ENTRADA': 'bg-purple-100 text-purple-800 border border-purple-200',</span>
-<span class="cstat-no" title="statement not covered" >      'PLATO_PRINCIPAL': 'bg-blue-100 text-blue-800 border border-blue-200',</span>
-<span class="cstat-no" title="statement not covered" >      'BEBIDA': 'bg-amber-100 text-amber-800 border border-amber-200',</span>
-<span class="cstat-no" title="statement not covered" >      'POSTRE': 'bg-pink-100 text-pink-800 border border-pink-200',</span>
-<span class="cstat-no" title="statement not covered" >      'ADICION': 'bg-indigo-100 text-indigo-800 border border-indigo-200'</span>
-<span class="cstat-no" title="statement not covered" >    };</span>
-<span class="cstat-no" title="statement not covered" >    return colors[categoria] || 'bg-gray-100 text-gray-800 border border-gray-200';</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  if (loading) return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;div className="flex justify-center items-center h-screen" data-testid="loading-spinner"&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"&gt;&lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >  )</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;div className="p-6 bg-gray-50 min-h-screen"&gt;</span>
-<span class="cstat-no" title="statement not covered" >      {/* Header */}</span>
-<span class="cstat-no" title="statement not covered" >      &lt;div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8"&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;h1 className="text-2xl font-bold text-gray-800"&gt;</span>
-<span class="cstat-no" title="statement not covered" >            {canEdit ? "Gestión de Productos" : "Menú Disponible"}</span>
-<span class="cstat-no" title="statement not covered" >          &lt;/h1&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;p className="text-gray-600 mt-1"&gt;Administra todos los productos del menú&lt;/p&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;div className="modal-overlay bg-white bg-opacity-30 backdrop-blur-sm z-50"&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;div className="modal-content promo-modal"&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;button className="close-button" onClick={onClose}&gt;×&lt;/button&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;h2 className="modal-title text-xl font-bold text-red-950"&gt;Crear Nueva Promoción&lt;/h2&gt;</span>
 <span class="cstat-no" title="statement not covered" >        </span>
-<span class="cstat-no" title="statement not covered" >        {canAdd &amp;&amp; (</span>
-<span class="cstat-no" title="statement not covered" >          &lt;button</span>
-<span class="cstat-no" title="statement not covered" >            onClick={() =&gt; setShowAddProduct(true)}</span>
-<span class="cstat-no" title="statement not covered" >            className="flex items-center bg-[#81412f] hover:bg-[#ff7c7c] text-white px-4 py-2 rounded-lg transition-colors mt-4 md:mt-0 shadow-sm"</span>
-<span class="cstat-no" title="statement not covered" >          &gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;span className="mr-2"&gt;+&lt;/span&gt;</span>
-<span class="cstat-no" title="statement not covered" >            Añadir Producto</span>
-<span class="cstat-no" title="statement not covered" >          &lt;/button&gt;</span>
+<span class="cstat-no" title="statement not covered" >        {error &amp;&amp; (</span>
+<span class="cstat-no" title="statement not covered" >          &lt;div className="error-message promo-error"&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;span&gt;⚠️&lt;/span&gt; {error}</span>
+<span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >        )}</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        {isLoading ? (</span>
+<span class="cstat-no" title="statement not covered" >          &lt;div className="loading-promo"&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;div className="spinner"&gt;&lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;p&gt;Creando promoción...&lt;/p&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >        ) : (</span>
+<span class="cstat-no" title="statement not covered" >          &lt;form onSubmit={handleSubmit} className="promo-form"&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;div className="form-group"&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;label&gt;Nombre:&lt;/label&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;input</span>
+<span class="cstat-no" title="statement not covered" >                type="text"</span>
+<span class="cstat-no" title="statement not covered" >                name="nombre"</span>
+<span class="cstat-no" title="statement not covered" >                value={formData.nombre}</span>
+<span class="cstat-no" title="statement not covered" >                onChange={handleChange}</span>
+<span class="cstat-no" title="statement not covered" >                onBlur={handleBlur}</span>
+<span class="cstat-no" title="statement not covered" >                className={touched.nombre &amp;&amp; !formData.nombre ? 'input-error' : ''}</span>
+<span class="cstat-no" title="statement not covered" >                required</span>
+<span class="cstat-no" title="statement not covered" >              /&gt;</span>
+<span class="cstat-no" title="statement not covered" >              {touched.nombre &amp;&amp; getFieldError('nombre') &amp;&amp; (</span>
+<span class="cstat-no" title="statement not covered" >                &lt;span className="field-error"&gt;{getFieldError('nombre')}&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >              )}</span>
+<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            &lt;div className="form-group"&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;label&gt;Descripción:&lt;/label&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;textarea</span>
+<span class="cstat-no" title="statement not covered" >                name="descripcion"</span>
+<span class="cstat-no" title="statement not covered" >                value={formData.descripcion}</span>
+<span class="cstat-no" title="statement not covered" >                onChange={handleChange}</span>
+<span class="cstat-no" title="statement not covered" >                onBlur={handleBlur}</span>
+<span class="cstat-no" title="statement not covered" >                className={touched.descripcion &amp;&amp; !formData.descripcion ? 'input-error' : ''}</span>
+<span class="cstat-no" title="statement not covered" >                required</span>
+<span class="cstat-no" title="statement not covered" >                rows="3"</span>
+<span class="cstat-no" title="statement not covered" >              /&gt;</span>
+<span class="cstat-no" title="statement not covered" >              {touched.descripcion &amp;&amp; getFieldError('descripcion') &amp;&amp; (</span>
+<span class="cstat-no" title="statement not covered" >                &lt;span className="field-error"&gt;{getFieldError('descripcion')}&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >              )}</span>
+<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            &lt;div className="form-row"&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;div className="form-group"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;label&gt;Descuento (%):&lt;/label&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;input</span>
+<span class="cstat-no" title="statement not covered" >                  type="number"</span>
+<span class="cstat-no" title="statement not covered" >                  name="descuento"</span>
+<span class="cstat-no" title="statement not covered" >                  min="1"</span>
+<span class="cstat-no" title="statement not covered" >                  max="100"</span>
+<span class="cstat-no" title="statement not covered" >                  value={formData.descuento}</span>
+<span class="cstat-no" title="statement not covered" >                  onChange={handleChange}</span>
+<span class="cstat-no" title="statement not covered" >                  onBlur={handleBlur}</span>
+<span class="cstat-no" title="statement not covered" >                  className={</span>
+<span class="cstat-no" title="statement not covered" >                    (touched.descuento &amp;&amp; getFieldError('descuento')) ? 'input-error' : ''</span>
+<span class="cstat-no" title="statement not covered" >                  }</span>
+<span class="cstat-no" title="statement not covered" >                  required</span>
+<span class="cstat-no" title="statement not covered" >                /&gt;</span>
+<span class="cstat-no" title="statement not covered" >                {touched.descuento &amp;&amp; getFieldError('descuento') &amp;&amp; (</span>
+<span class="cstat-no" title="statement not covered" >                  &lt;span className="field-error"&gt;{getFieldError('descuento')}&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >                )}</span>
+<span class="cstat-no" title="statement not covered" >              &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >              &lt;div className="form-group"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;label&gt;Estado:&lt;/label&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;select</span>
+<span class="cstat-no" title="statement not covered" >                  name="estado"</span>
+<span class="cstat-no" title="statement not covered" >                  value={formData.estado}</span>
+<span class="cstat-no" title="statement not covered" >                  onChange={handleChange}</span>
+<span class="cstat-no" title="statement not covered" >                  className="estado-select"</span>
+<span class="cstat-no" title="statement not covered" >                &gt;</span>
+<span class="cstat-no" title="statement not covered" >                  &lt;option value="ACTIVA"&gt;Activa&lt;/option&gt;</span>
+<span class="cstat-no" title="statement not covered" >                  &lt;option value="INACTIVA"&gt;Inactiva&lt;/option&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;/select&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            &lt;div className="form-group productos-section"&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;label&gt;Productos incluidos:&lt;/label&gt;</span>
+<span class="cstat-no" title="statement not covered" >              {touched.productos &amp;&amp; formData.productos.length === 0 &amp;&amp; (</span>
+<span class="cstat-no" title="statement not covered" >                &lt;span className="field-error"&gt;Seleccione al menos un producto&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >              )}</span>
+<span class="cstat-no" title="statement not covered" >              &lt;div className="productos-grid"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                {productos.length &gt; 0 ? (</span>
+<span class="cstat-no" title="statement not covered" >                  productos.map(producto =&gt; (</span>
+<span class="cstat-no" title="statement not covered" >                    &lt;div key={producto.id} className="producto-checkbox"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                      &lt;input</span>
+<span class="cstat-no" title="statement not covered" >                        type="checkbox"</span>
+<span class="cstat-no" title="statement not covered" >                        id={`producto-${producto.id}`}</span>
+<span class="cstat-no" title="statement not covered" >                        checked={formData.productos.includes(producto.id)}</span>
+<span class="cstat-no" title="statement not covered" >                        onChange={() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                          handleProductoChange(producto.id);</span>
+<span class="cstat-no" title="statement not covered" >                          setTouched(prev =&gt; ({ ...prev, productos: true }));</span>
+<span class="cstat-no" title="statement not covered" >                        }}</span>
+<span class="cstat-no" title="statement not covered" >                      /&gt;</span>
+<span class="cstat-no" title="statement not covered" >                      &lt;label htmlFor={`producto-${producto.id}`}&gt;</span>
+<span class="cstat-no" title="statement not covered" >                        {producto.nombre} (${producto.precio})</span>
+<span class="cstat-no" title="statement not covered" >                      &lt;/label&gt;</span>
+<span class="cstat-no" title="statement not covered" >                    &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >                  ))</span>
+<span class="cstat-no" title="statement not covered" >                ) : (</span>
+<span class="cstat-no" title="statement not covered" >                  &lt;p className="no-products"&gt;Cargando productos...&lt;/p&gt;</span>
+<span class="cstat-no" title="statement not covered" >                )}</span>
+<span class="cstat-no" title="statement not covered" >              &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            &lt;div className="form-row"&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;div className="form-group"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;label&gt;Fecha inicio:&lt;/label&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;input</span>
+<span class="cstat-no" title="statement not covered" >                  type="date"</span>
+<span class="cstat-no" title="statement not covered" >                  name="fecha_inicio"</span>
+<span class="cstat-no" title="statement not covered" >                  value={formData.fecha_inicio}</span>
+<span class="cstat-no" title="statement not covered" >                  onChange={handleChange}</span>
+<span class="cstat-no" title="statement not covered" >                  required</span>
+<span class="cstat-no" title="statement not covered" >                /&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >              &lt;div className="form-group"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;label&gt;Fecha fin:&lt;/label&gt;</span>
+<span class="cstat-no" title="statement not covered" >                &lt;input</span>
+<span class="cstat-no" title="statement not covered" >                  type="date"</span>
+<span class="cstat-no" title="statement not covered" >                  name="fecha_fin"</span>
+<span class="cstat-no" title="statement not covered" >                  value={formData.fecha_fin}</span>
+<span class="cstat-no" title="statement not covered" >                  min={formData.fecha_inicio}</span>
+<span class="cstat-no" title="statement not covered" >                  onChange={handleChange}</span>
+<span class="cstat-no" title="statement not covered" >                  onBlur={handleBlur}</span>
+<span class="cstat-no" title="statement not covered" >                  className={touched.fecha_fin &amp;&amp; getFieldError('fecha_fin') ? 'input-error' : ''}</span>
+<span class="cstat-no" title="statement not covered" >                  required</span>
+<span class="cstat-no" title="statement not covered" >                /&gt;</span>
+<span class="cstat-no" title="statement not covered" >                {touched.fecha_fin &amp;&amp; getFieldError('fecha_fin') &amp;&amp; (</span>
+<span class="cstat-no" title="statement not covered" >                  &lt;span className="field-error"&gt;{getFieldError('fecha_fin')}&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >                )}</span>
+<span class="cstat-no" title="statement not covered" >              &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            &lt;div className="form-actions"&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;button type="button" onClick={onClose} className="cancel-button"&gt;</span>
+<span class="cstat-no" title="statement not covered" >                Cancelar</span>
+<span class="cstat-no" title="statement not covered" >              &lt;/button&gt;</span>
+<span class="cstat-no" title="statement not covered" >              &lt;button type="submit" className="submit-button" disabled={isLoading}&gt;</span>
+<span class="cstat-no" title="statement not covered" >                {isLoading ? 'Creando...' : 'Crear Promoción'}</span>
+<span class="cstat-no" title="statement not covered" >              &lt;/button&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;/form&gt;</span>
 <span class="cstat-no" title="statement not covered" >        )}</span>
 <span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      {/* Filtros y búsqueda */}</span>
-<span class="cstat-no" title="statement not covered" >      &lt;div className="bg-white p-4 rounded-lg shadow mb-6 border border-gray-200"&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div className="flex flex-col md:flex-row gap-4"&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;div className="relative flex-1"&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"&gt;</span>
-<span class="cstat-no" title="statement not covered" >            </span>
-<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;input</span>
-<span class="cstat-no" title="statement not covered" >              type="text"</span>
-<span class="cstat-no" title="statement not covered" >              placeholder="Buscar productos por nombre o descripción..."</span>
-<span class="cstat-no" title="statement not covered" >              className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4F46E5] focus:border-[#4F46E5]"</span>
-<span class="cstat-no" title="statement not covered" >              value={searchTerm}</span>
-<span class="cstat-no" title="statement not covered" >              onChange={(e) =&gt; setSearchTerm(e.target.value)}</span>
-<span class="cstat-no" title="statement not covered" >            /&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >          </span>
-<span class="cstat-no" title="statement not covered" >          &lt;div className="relative"&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;button</span>
-<span class="cstat-no" title="statement not covered" >              onClick={() =&gt; setIsDropdownOpen(!isDropdownOpen)}</span>
-<span class="cstat-no" title="statement not covered" >              className="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#4F46E5] w-full md:w-64"</span>
-<span class="cstat-no" title="statement not covered" >            &gt;</span>
-<span class="cstat-no" title="statement not covered" >              &lt;div className="flex items-center"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;span className="mr-2 text-gray-400"&gt;⏫&lt;/span&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;span&gt;{CATEGORIAS.find(c =&gt; c.id === selectedCategory)?.nombre}&lt;/span&gt;</span>
-<span class="cstat-no" title="statement not covered" >              &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >              &lt;span className={`ml-2 transition-transform ${isDropdownOpen ? 'transform rotate-180' : ''}`}&gt;▼&lt;/span&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;/button&gt;</span>
-<span class="cstat-no" title="statement not covered" >            </span>
-<span class="cstat-no" title="statement not covered" >            {isDropdownOpen &amp;&amp; (</span>
-<span class="cstat-no" title="statement not covered" >              &lt;div className="absolute z-10 mt-1 w-full md:w-64 bg-white border border-gray-300 rounded-lg shadow-lg"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                {CATEGORIAS.map((cat) =&gt; (</span>
-<span class="cstat-no" title="statement not covered" >                  &lt;button</span>
-<span class="cstat-no" title="statement not covered" >                    key={cat.id}</span>
-<span class="cstat-no" title="statement not covered" >                    onClick={() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                      setSelectedCategory(cat.id);</span>
-<span class="cstat-no" title="statement not covered" >                      setIsDropdownOpen(false);</span>
-<span class="cstat-no" title="statement not covered" >                    }}</span>
-<span class="cstat-no" title="statement not covered" >                    className={`block w-full text-left px-4 py-2 hover:bg-gray-50 ${</span>
-<span class="cstat-no" title="statement not covered" >                      selectedCategory === cat.id ? 'bg-[#4F46E5] text-white font-medium' : 'text-gray-700'</span>
-<span class="cstat-no" title="statement not covered" >                    }`}</span>
-<span class="cstat-no" title="statement not covered" >                  &gt;</span>
-<span class="cstat-no" title="statement not covered" >                    {cat.nombre}</span>
-<span class="cstat-no" title="statement not covered" >                  &lt;/button&gt;</span>
-<span class="cstat-no" title="statement not covered" >                ))}</span>
-<span class="cstat-no" title="statement not covered" >              &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >            )}</span>
-<span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      {/* Tabla de productos */}</span>
-<span class="cstat-no" title="statement not covered" >      &lt;div className="bg-white rounded-lg shadow overflow-hidden border border-gray-200"&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div className="overflow-x-auto"&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;table className="min-w-full divide-y divide-gray-200"&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;thead className="bg-[#F9FAFB]"&gt;</span>
-<span class="cstat-no" title="statement not covered" >              &lt;tr&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"&gt;Producto&lt;/th&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"&gt;Categoría&lt;/th&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"&gt;Descripción&lt;/th&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"&gt;Precio&lt;/th&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"&gt;Estado&lt;/th&gt;</span>
-<span class="cstat-no" title="statement not covered" >                {canEdit &amp;&amp; &lt;th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"&gt;Acciones&lt;/th&gt;}</span>
-<span class="cstat-no" title="statement not covered" >              &lt;/tr&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;/thead&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;tbody className="bg-white divide-y divide-gray-200"&gt;</span>
-<span class="cstat-no" title="statement not covered" >              {filteredProducts.length &gt; 0 ? (</span>
-<span class="cstat-no" title="statement not covered" >                filteredProducts.map((product) =&gt; (</span>
-<span class="cstat-no" title="statement not covered" >                  &lt;tr key={product.id} className="hover:bg-gray-50 transition-colors"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    &lt;td className="px-6 py-4 whitespace-nowrap"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                      &lt;div className="font-medium text-gray-900"&gt;{product.nombre}&lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    &lt;/td&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    &lt;td className="px-6 py-4 whitespace-nowrap"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                      &lt;span className={`px-3 py-1 text-xs rounded-full ${getCategoryColor(product.categoria)}`}&gt;</span>
-<span class="cstat-no" title="statement not covered" >                        {product.categoria_nombre || product.categoria}</span>
-<span class="cstat-no" title="statement not covered" >                      &lt;/span&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    &lt;/td&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    &lt;td className="px-6 py-4 text-sm text-gray-500 max-w-xs"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                      &lt;div className="line-clamp-2"&gt;{product.descripcion}&lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    &lt;/td&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    &lt;td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                      ${parseFloat(product.precio).toLocaleString('es-CO')}</span>
-<span class="cstat-no" title="statement not covered" >                    &lt;/td&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    &lt;td className="px-6 py-4 whitespace-nowrap"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                      &lt;span className={`px-3 py-1 text-xs font-medium rounded-full ${getEstadoStyles(product.estado)}`}&gt;</span>
-<span class="cstat-no" title="statement not covered" >                        {product.estado_nombre || product.estado}</span>
-<span class="cstat-no" title="statement not covered" >                      &lt;/span&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    &lt;/td&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    </span>
-<span class="cstat-no" title="statement not covered" >                    {canEdit &amp;&amp; (</span>
-<span class="cstat-no" title="statement not covered" >                      &lt;td className="px-6 py-4 whitespace-nowrap text-sm font-medium"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                        &lt;div className="flex space-x-2"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                          &lt;button </span>
-<span class="cstat-no" title="statement not covered" >                            onClick={() =&gt; setSelectedProduct(product)}</span>
-<span class="cstat-no" title="statement not covered" >                            className="text-[#4F46E5] hover:text-[#4338CA] p-2 rounded hover:bg-[#EEF2FF] transition-colors"</span>
-<span class="cstat-no" title="statement not covered" >                            title="Editar"</span>
-<span class="cstat-no" title="statement not covered" >                          &gt;</span>
-<span class="cstat-no" title="statement not covered" >                            ✏️ Editar</span>
-<span class="cstat-no" title="statement not covered" >                          &lt;/button&gt;</span>
-<span class="cstat-no" title="statement not covered" >                          {canDelete &amp;&amp; (</span>
-<span class="cstat-no" title="statement not covered" >                            &lt;button </span>
-<span class="cstat-no" title="statement not covered" >                              onClick={() =&gt; handleDelete(product.id)}</span>
-<span class="cstat-no" title="statement not covered" >                              className="text-[#DC2626] hover:text-[#B91C1C] p-2 rounded hover:bg-[#FEE2E2] transition-colors"</span>
-<span class="cstat-no" title="statement not covered" >                              title="Eliminar"</span>
-<span class="cstat-no" title="statement not covered" >                            &gt;</span>
-<span class="cstat-no" title="statement not covered" >                              🗑️ Eliminar</span>
-<span class="cstat-no" title="statement not covered" >                            &lt;/button&gt;</span>
-<span class="cstat-no" title="statement not covered" >                          )}</span>
-<span class="cstat-no" title="statement not covered" >                        &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >                      &lt;/td&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    )}</span>
-<span class="cstat-no" title="statement not covered" >                  &lt;/tr&gt;</span>
-<span class="cstat-no" title="statement not covered" >                ))</span>
-<span class="cstat-no" title="statement not covered" >              ) : (</span>
-<span class="cstat-no" title="statement not covered" >                &lt;tr&gt;</span>
-<span class="cstat-no" title="statement not covered" >                  &lt;td colSpan={canEdit ? 6 : 5} className="px-6 py-4 text-center text-gray-500"&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    No se encontraron productos</span>
-<span class="cstat-no" title="statement not covered" >                  &lt;/td&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;/tr&gt;</span>
-<span class="cstat-no" title="statement not covered" >              )}</span>
-<span class="cstat-no" title="statement not covered" >            &lt;/tbody&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;/table&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      {/* Modales */}</span>
-<span class="cstat-no" title="statement not covered" >      {showAddProduct &amp;&amp; (</span>
-<span class="cstat-no" title="statement not covered" >        &lt;AddVehicle </span>
-<span class="cstat-no" title="statement not covered" >          onClose={() =&gt; setShowAddProduct(false)}</span>
-<span class="cstat-no" title="statement not covered" >          onAdd={handleAddProduct}</span>
-<span class="cstat-no" title="statement not covered" >          categorias={CATEGORIAS.filter(cat =&gt; cat.id !== 'TODAS')}</span>
-<span class="cstat-no" title="statement not covered" >        /&gt;</span>
-<span class="cstat-no" title="statement not covered" >      )}</span>
-<span class="cstat-no" title="statement not covered" >      </span>
-<span class="cstat-no" title="statement not covered" >      {selectedProduct &amp;&amp; (</span>
-<span class="cstat-no" title="statement not covered" >        &lt;EditVehicle </span>
-<span class="cstat-no" title="statement not covered" >          vehicle={selectedProduct}</span>
-<span class="cstat-no" title="statement not covered" >          onClose={() =&gt; setSelectedProduct(null)}</span>
-<span class="cstat-no" title="statement not covered" >          onEdit={handleUpdateProduct}</span>
-<span class="cstat-no" title="statement not covered" >          categorias={CATEGORIAS.filter(cat =&gt; cat.id !== 'TODAS')}</span>
-<span class="cstat-no" title="statement not covered" >        /&gt;</span>
-<span class="cstat-no" title="statement not covered" >      )}</span>
 <span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >  );</span>
 <span class="cstat-no" title="statement not covered" >};</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >export default VehicleList;</span></pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >export default CreatePromocion;</span></pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-28T23:53:10.268Z
+                at 2025-05-30T22:45:49.628Z
             </div>
-        <script src="prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="sorter.js"></script>
-        <script src="block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     

@@ -36,7 +36,7 @@ const EditVehicle = ({ vehicle, onClose, onEdit }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
         const formIsValid = validateForm();
         if (!formIsValid) return;
     

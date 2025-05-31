@@ -1,11 +1,20 @@
+// src/components/VehicleList.test.jsx
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import VehicleList from './VehicleList';
-import { useAuth } from '../context/AuthContext';
 import api from '../api/axiosConfig';
+import { useAuth } from '../context/AuthContext';
 
-// Mock de useAuth y api
-jest.mock('../context/AuthContext');
-jest.mock('../api/axiosConfig');
+// Mocks
+vi.mock('../api/axiosConfig', () => ({
+  default: {
+    get: vi.fn()
+  }
+}));
+
+vi.mock('../context/AuthContext', () => ({
+  useAuth: vi.fn()
+}));
 
 // Datos de prueba
 const mockProducts = [
@@ -32,88 +41,75 @@ const mockProducts = [
 ];
 
 describe('<VehicleList />', () => {
-  // Configuración común
   beforeEach(() => {
     useAuth.mockReturnValue({ user: { is_admin: true } });
     api.get.mockResolvedValue({ data: mockProducts });
   });
 
-  // --- Prueba 1: Renderizado inicial ---
-  it('debe mostrar un loading y luego la lista de productos', async () => {
+  it('1. Muestra loading y luego la lista de productos', async () => {
     render(<VehicleList />);
-    
-    // Verificar loading inicial
     expect(screen.getByRole('status')).toBeInTheDocument();
-    
-    // Esperar a que se carguen los productos
+
     await waitFor(() => {
       expect(screen.getByText('Hamburguesa')).toBeInTheDocument();
       expect(screen.getByText('Coca Cola')).toBeInTheDocument();
     });
   });
 
-  // --- Prueba 2: Filtrado por categoría ---
-  it('debe filtrar productos por categoría', async () => {
+  it('2. Filtra productos por categoría', async () => {
     render(<VehicleList />);
-    
+
     await waitFor(() => {
-      // Abrir dropdown de categorías
       const dropdown = screen.getByText('Todas las categorías');
       fireEvent.click(dropdown);
-      
-      // Seleccionar "Bebidas"
+
       const bebidasOption = screen.getByText('Bebidas');
       fireEvent.click(bebidasOption);
-      
-      // Verificar que solo aparece "Coca Cola"
+
       expect(screen.queryByText('Hamburguesa')).not.toBeInTheDocument();
       expect(screen.getByText('Coca Cola')).toBeInTheDocument();
     });
   });
 
-  // --- Prueba 3: Búsqueda por nombre/descripción ---
-  it('debe filtrar productos por búsqueda', async () => {
+  it('3. Filtra productos por búsqueda', async () => {
     render(<VehicleList />);
-    
+
     await waitFor(() => {
       const searchInput = screen.getByPlaceholderText('Buscar productos...');
       fireEvent.change(searchInput, { target: { value: 'hamburguesa' } });
-      
+
       expect(screen.getByText('Hamburguesa')).toBeInTheDocument();
       expect(screen.queryByText('Coca Cola')).not.toBeInTheDocument();
     });
   });
 
-  // --- Prueba 4: Botón de eliminar (admin) ---
-  it('debe mostrar botón de eliminar si el usuario es admin', async () => {
+  it('4. Muestra botón de eliminar para admin', async () => {
     render(<VehicleList />);
-    
+
     await waitFor(() => {
       const deleteButtons = screen.getAllByText('🗑️ Eliminar');
       expect(deleteButtons.length).toBe(mockProducts.length);
     });
   });
 
-  // --- Prueba 5: Ocultar acciones si no es admin ---
-  it('no debe mostrar botones de editar/eliminar si el usuario no es admin', async () => {
+  it('5. No muestra botones de acciones si no es admin', async () => {
     useAuth.mockReturnValue({ user: { is_admin: false } });
     render(<VehicleList />);
-    
+
     await waitFor(() => {
       expect(screen.queryByText('✏️ Editar')).not.toBeInTheDocument();
       expect(screen.queryByText('🗑️ Eliminar')).not.toBeInTheDocument();
     });
   });
 
-  // --- Prueba 6: Añadir producto ---
-  it('debe abrir el modal de añadir producto al hacer clic', async () => {
+  it('6. Abre el modal de añadir producto al hacer clic', async () => {
     render(<VehicleList />);
-    
+
     const addButton = screen.getByText('Añadir Producto');
     fireEvent.click(addButton);
-    
+
     await waitFor(() => {
-      expect(screen.getByText('Añadir Vehículo')).toBeInTheDocument(); // Ajusta según tu modal
+      expect(screen.getByText('Añadir Vehículo')).toBeInTheDocument(); // Ajusta si el modal tiene otro título
     });
   });
 });

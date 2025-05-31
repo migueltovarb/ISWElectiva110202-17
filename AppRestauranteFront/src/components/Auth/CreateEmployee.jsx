@@ -43,8 +43,11 @@ const CreateEmployee = () => {
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-gray-700 mb-1">Nombre de usuario</label>
+          <label htmlFor="username" className="block text-gray-700 mb-1">
+            Nombre de usuario
+          </label>
           <input
+            id="username"
             type="text"
             name="username"
             value={formData.username}
@@ -55,8 +58,11 @@ const CreateEmployee = () => {
         </div>
 
         <div>
-          <label className="block text-gray-700 mb-1">Email</label>
+          <label htmlFor="email" className="block text-gray-700 mb-1">
+            Email
+          </label>
           <input
+            id="email"
             type="email"
             name="email"
             value={formData.email}
@@ -67,8 +73,11 @@ const CreateEmployee = () => {
         </div>
 
         <div>
-          <label className="block text-gray-700 mb-1">Contraseña</label>
+          <label htmlFor="password" className="block text-gray-700 mb-1">
+            Contraseña
+          </label>
           <input
+            id="password"
             type="password"
             name="password"
             value={formData.password}
@@ -79,8 +88,11 @@ const CreateEmployee = () => {
         </div>
 
         <div>
-          <label className="block text-gray-700 mb-1">Tipo de empleado</label>
+          <label htmlFor="tipo_empleado" className="block text-gray-700 mb-1">
+            Tipo de empleado
+          </label>
           <select
+            id="tipo_empleado"
             name="tipo_empleado"
             value={formData.tipo_empleado}
             onChange={handleChange}
@@ -92,8 +104,11 @@ const CreateEmployee = () => {
         </div>
 
         <div>
-          <label className="block text-gray-700 mb-1">Teléfono (opcional)</label>
+          <label htmlFor="telefono" className="block text-gray-700 mb-1">
+            Teléfono (opcional)
+          </label>
           <input
+            id="telefono"
             type="tel"
             name="telefono"
             value={formData.telefono}

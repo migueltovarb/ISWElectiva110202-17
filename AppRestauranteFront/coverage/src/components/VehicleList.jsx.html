@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for VehicleList.jsx</title>
+    <title>Code coverage report for src/components/VehicleList.jsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prettify.css" />
-    <link rel="stylesheet" href="base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> VehicleList.jsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/components</a> VehicleList.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/278</span>
+                <span class='fraction'>0/273</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/278</span>
+                <span class='fraction'>0/273</span>
             </div>
         
             
@@ -335,17 +335,7 @@
 <a name='L270'></a><a href='#L270'>270</a>
 <a name='L271'></a><a href='#L271'>271</a>
 <a name='L272'></a><a href='#L272'>272</a>
-<a name='L273'></a><a href='#L273'>273</a>
-<a name='L274'></a><a href='#L274'>274</a>
-<a name='L275'></a><a href='#L275'>275</a>
-<a name='L276'></a><a href='#L276'>276</a>
-<a name='L277'></a><a href='#L277'>277</a>
-<a name='L278'></a><a href='#L278'>278</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L273'></a><a href='#L273'>273</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -643,7 +633,6 @@
 <span class="cstat-no" title="statement not covered" >  const [searchTerm, setSearchTerm] = useState('');</span>
 <span class="cstat-no" title="statement not covered" >  const [isDropdownOpen, setIsDropdownOpen] = useState(false);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  // Variables de permisos</span>
 <span class="cstat-no" title="statement not covered" >  const canEdit = user?.is_admin || user?.tipo_empleado === 'MES';</span>
 <span class="cstat-no" title="statement not covered" >  const canAdd = user?.is_admin;</span>
 <span class="cstat-no" title="statement not covered" >  const canDelete = user?.is_admin;</span>
@@ -722,14 +711,13 @@
 <span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  if (loading) return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;div className="flex justify-center items-center h-screen" data-testid="loading-spinner"&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;div className="flex justify-center items-center h-screen"&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"&gt;&lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >  )</span>
+<span class="cstat-no" title="statement not covered" >  );</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
 <span class="cstat-no" title="statement not covered" >    &lt;div className="p-6 bg-gray-50 min-h-screen"&gt;</span>
-<span class="cstat-no" title="statement not covered" >      {/* Header */}</span>
 <span class="cstat-no" title="statement not covered" >      &lt;div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8"&gt;</span>
 <span class="cstat-no" title="statement not covered" >        &lt;div&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;h1 className="text-2xl font-bold text-gray-800"&gt;</span>
@@ -749,7 +737,6 @@
 <span class="cstat-no" title="statement not covered" >        )}</span>
 <span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      {/* Filtros y búsqueda */}</span>
 <span class="cstat-no" title="statement not covered" >      &lt;div className="bg-white p-4 rounded-lg shadow mb-6 border border-gray-200"&gt;</span>
 <span class="cstat-no" title="statement not covered" >        &lt;div className="flex flex-col md:flex-row gap-4"&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;div className="relative flex-1"&gt;</span>
@@ -799,7 +786,6 @@
 <span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      {/* Tabla de productos */}</span>
 <span class="cstat-no" title="statement not covered" >      &lt;div className="bg-white rounded-lg shadow overflow-hidden border border-gray-200"&gt;</span>
 <span class="cstat-no" title="statement not covered" >        &lt;div className="overflow-x-auto"&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;table className="min-w-full divide-y divide-gray-200"&gt;</span>
@@ -873,7 +859,6 @@
 <span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >      {/* Modales */}</span>
 <span class="cstat-no" title="statement not covered" >      {showAddProduct &amp;&amp; (</span>
 <span class="cstat-no" title="statement not covered" >        &lt;AddVehicle </span>
 <span class="cstat-no" title="statement not covered" >          onClose={() =&gt; setShowAddProduct(false)}</span>
@@ -901,16 +886,16 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-28T23:53:10.230Z
+                at 2025-05-30T22:45:49.628Z
             </div>
-        <script src="prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="sorter.js"></script>
-        <script src="block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     

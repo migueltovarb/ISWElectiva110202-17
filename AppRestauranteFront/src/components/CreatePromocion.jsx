@@ -50,7 +50,6 @@ const CreatePromocion = ({ onClose, onCreate }) => {
       [name]: value
     }));
     
-    // Marcar el campo como "touched"
     setTouched(prev => ({ ...prev, [name]: true }));
   };
 
@@ -112,7 +111,6 @@ const CreatePromocion = ({ onClose, onCreate }) => {
     setTouched(prev => ({ ...prev, [name]: true }));
   };
 
-  // Función para mostrar errores de campo
   const getFieldError = (fieldName) => {
     if (!touched[fieldName]) return null;
     

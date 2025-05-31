@@ -1,9 +1,9 @@
- import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './components/Auth/Login';
 import VehicleList from './components/VehicleList';
 import PromocionList from './components/PromocionList';
-import EditPromocion from './components/EditPromocion'; // 1. Importa el nuevo componente
+import EditPromocion from './components/EditPromocion';
 import Logout from './components/Auth/Logout';
 import Navbar from './components/Navbar';
 import CreateEmployee from './components/Auth/CreateEmployee';
@@ -110,13 +110,11 @@ function App() {
           } />
 
           {/* Rutas protegidas para personal */}
-
           <Route path="/promociones" element={
             <PrivateRoute>
               <PromocionList />
             </PrivateRoute>
           } />
-
 
           <Route path="/promociones/editar/:id" element={
             <PrivateRoute adminOnly>

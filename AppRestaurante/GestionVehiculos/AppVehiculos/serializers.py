@@ -3,6 +3,8 @@ from .models import Empleado, Producto, Promocion, Cliente
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.utils import timezone
+from decimal import Decimal
+from django.core.validators import MinValueValidator
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -35,7 +37,11 @@ class ProductoSerializer(serializers.ModelSerializer):
     categoria_nombre = serializers.CharField(source='get_categoria_display', read_only=True)
     estado_nombre = serializers.CharField(source='get_estado_display', read_only=True)
     imagen_url = serializers.SerializerMethodField()
-
+    precio = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0.01'))]  # Usa Decimal
+    )
     class Meta:
         model = Producto
         fields = '__all__'
