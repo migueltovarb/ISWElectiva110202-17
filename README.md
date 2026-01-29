@@ -1,77 +1,86 @@
-🍽️ App Restaurante
+---
 
-Sistema de Gestión y Pedidos para Restaurantes
+# 🍽️ App Restaurante
 
-📌 Descripción general
+Sistema de gestión y pedidos para restaurantes.
 
-Este proyecto corresponde al desarrollo de un sistema web para la gestión integral de pedidos en un restaurante, orientado tanto a clientes como a personal interno (administradores y meseros).
+---
 
-El sistema permite la visualización del menú y promociones, la realización y seguimiento de pedidos en tiempo real, la gestión de inventario y promociones, así como la administración completa del restaurante desde un panel centralizado.
+## 📌 Descripción general
 
-La aplicación fue desarrollada con una arquitectura desacoplada, separando frontend, backend y base de datos para garantizar escalabilidad, seguridad y facilidad de mantenimiento.
+**App Restaurante** es un sistema web diseñado para la **gestión integral de pedidos en un restaurante**, dirigido tanto a **clientes** como a **personal interno** (administradores y meseros).
 
-🧱 Arquitectura del sistema
+El sistema permite la visualización del menú y promociones, la realización de pedidos personalizados, el seguimiento de pedidos en tiempo real y la administración del inventario y promociones desde un panel centralizado.
 
-Frontend: Next.js
+La aplicación utiliza una **arquitectura desacoplada**, separando frontend, backend y base de datos, lo que garantiza **escalabilidad, seguridad y facilidad de mantenimiento**.
 
-Backend: Python – Django / Django REST Framework
+---
 
-Base de datos: PostgreSQL
+## 🧱 Arquitectura del sistema
 
-Contenedores: Docker
+* 🎨 **Frontend:** Next.js
+* ⚙️ **Backend:** Python – Django / Django REST Framework
+* 🗄️ **Base de datos:** PostgreSQL
+* 🐳 **Contenedores:** Docker
 
-👥 Tipos de usuario
+---
 
-Administrador
+## 👥 Tipos de usuario
 
-Mesero
+* 👑 **Administrador**
+* 🍽️ **Mesero**
+* 👤 **Cliente**
 
-Cliente
+Cada tipo de usuario cuenta con permisos y vistas específicas dentro del sistema.
 
-Cada rol cuenta con permisos y vistas específicas dentro del sistema.
+---
 
-📖 Historias de usuario
+## 📖 Historias de usuario
 
-El sistema fue diseñado a partir de 36 historias de usuario, cubriendo los principales flujos del negocio:
+El sistema fue desarrollado a partir de **36 historias de usuario**, que cubren los principales flujos del negocio, entre ellos:
 
-Autenticación de clientes y personal
+* 🔐 Autenticación de clientes y personal
+* 🛒 Gestión de pedidos y pagos
+* ⏱️ Seguimiento de pedidos en tiempo real
+* 📦 Gestión de productos, inventario y promociones
+* 🔔 Notificaciones y administración
 
-Gestión de pedidos y pagos
+El detalle completo de las historias de usuario se encuentra documentado en la **Wiki del repositorio**.
 
-Seguimiento en tiempo real
+---
 
-Gestión de productos, inventario y promociones
+## ⚙️ Instalación local
 
-Notificaciones y administración
+### 🔧 Requisitos previos
 
-El detalle completo de las historias de usuario se encuentra documentado en la Wiki del repositorio.
+* Docker
+* Docker Compose
+* Node.js (v18 o superior recomendado)
+* Python 3.10 o superior
+* Git
 
-⚙️ Instalación local
-🔧 Requisitos previos
+---
 
-Docker
+### 🐳 Clonar el repositorio
 
-Docker Compose
-
-Node.js (v18 o superior recomendado)
-
-Python 3.10+
-
-Git
-
-🐳 Clonar el repositorio
+```bash
 git clone https://github.com/Valery-Rosero/ISWElectiva110202-17.git
 cd ISWElectiva110202-17
+```
 
-🗄️ Configuración del backend (Django)
+---
 
-Acceder a la carpeta del backend:
+### 🗄️ Configuración del backend (Django)
 
+1. Acceder a la carpeta del backend:
+
+```bash
 cd AppRestaurante
+```
 
+2. Crear el archivo `.env` con las variables necesarias:
 
-Crear el archivo .env con las variables necesarias:
-
+```env
 DEBUG=True
 SECRET_KEY=your_secret_key
 DB_NAME=postgres
@@ -79,59 +88,78 @@ DB_USER=postgres
 DB_PASSWORD=postgres
 DB_HOST=db
 DB_PORT=5432
+```
 
+3. Levantar los servicios con Docker:
 
-Levantar los servicios con Docker:
-
+```bash
 docker-compose up --build
+```
 
+4. Ejecutar las migraciones:
 
-Ejecutar las migraciones:
-
+```bash
 docker-compose exec backend python manage.py migrate
+```
 
+5. (Opcional) Crear un superusuario:
 
-(Opcional) Crear un superusuario:
-
+```bash
 docker-compose exec backend python manage.py createsuperuser
-
+```
 
 Backend disponible en:
 
+```
 http://localhost:8000
+```
 
-🌐 Configuración del frontend (Next.js)
+---
 
-Acceder a la carpeta del frontend:
+### 🌐 Configuración del frontend (Next.js)
 
+1. Acceder a la carpeta del frontend:
+
+```bash
 cd AppRestauranteFront
+```
 
+2. Instalar las dependencias:
 
-Instalar dependencias:
-
+```bash
 npm install
+```
 
+3. Crear el archivo `.env.local`:
 
-Crear el archivo .env.local:
-
+```env
 NEXT_PUBLIC_API_URL=http://localhost:8000
+```
 
+4. Iniciar el servidor de desarrollo:
 
-Iniciar el servidor de desarrollo:
-
+```bash
 npm run dev
-
+```
 
 Frontend disponible en:
 
+```
 http://localhost:3000
+```
 
-🧪 Tecnologías utilizadas
-Tecnología	Uso
-Python	Backend
-Django / DRF	API REST
-Next.js	Frontend
-PostgreSQL	Base de datos
-Docker	Contenedores
-JavaScript	Lógica frontend
-CSS / HTML	Interfaz
+---
+
+## 🧪 Tecnologías utilizadas
+
+* 🐍 Python
+* 🧩 Django / Django REST Framework
+* ⚛️ Next.js
+* 🐘 PostgreSQL
+* 🐳 Docker
+* 📜 JavaScript
+* 🎨 CSS / HTML
+
+---
+
+
